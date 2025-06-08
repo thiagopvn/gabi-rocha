@@ -73,8 +73,9 @@
             position: relative;
             overflow: hidden;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border-radius: 16px;
         }
-        .gallery-item:hover { transform: scale(1.03); }
+        .gallery-item:hover { transform: scale(1.02); }
         .gallery-item::before {
             content: '';
             position: absolute;
@@ -92,7 +93,59 @@
             object-fit: cover;
             transition: transform 0.4s ease;
         }
-        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item:hover img { transform: scale(1.05); }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            grid-auto-rows: 20px;
+        }
+        
+        /* Alturas específicas baseadas nas proporções reais das fotos */
+        .gallery-item:nth-child(1) { grid-row: span 20; } /* foto1: 1200x1600 (3:4) */
+        .gallery-item:nth-child(2) { grid-row: span 24; } /* foto2: 1066x1600 (2:3) */
+        .gallery-item:nth-child(3) { grid-row: span 24; } /* foto3: 1066x1600 (2:3) */
+        .gallery-item:nth-child(4) { grid-row: span 20; } /* foto4: 1200x1600 (3:4) */
+        .gallery-item:nth-child(5) { grid-row: span 20; } /* foto5: 1198x1600 (3:4) */
+        .gallery-item:nth-child(6) { grid-row: span 28; } /* foto6: 900x1600 (9:16) */
+        .gallery-item:nth-child(7) { grid-row: span 24; } /* foto7: 1066x1600 (2:3) */
+        .gallery-item:nth-child(8) { grid-row: span 28; } /* foto8: 900x1600 (9:16) */
+        .gallery-item:nth-child(9) { grid-row: span 28; } /* foto9: 900x1600 (9:16) */
+        .gallery-item:nth-child(10) { grid-row: span 24; } /* foto10: 1066x1600 (2:3) */
+        .gallery-item:nth-child(11) { grid-row: span 16; grid-column: 1 / -1; } /* foto11: 1600x1441 (landscape) */
+        .gallery-item:nth-child(12) { grid-row: span 24; } /* foto12: 1066x1600 (2:3) */
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                grid-auto-rows: 15px;
+            }
+            
+            .gallery-item:nth-child(1) { grid-row: span 15; }
+            .gallery-item:nth-child(2) { grid-row: span 18; }
+            .gallery-item:nth-child(3) { grid-row: span 18; }
+            .gallery-item:nth-child(4) { grid-row: span 15; }
+            .gallery-item:nth-child(5) { grid-row: span 15; }
+            .gallery-item:nth-child(6) { grid-row: span 21; }
+            .gallery-item:nth-child(7) { grid-row: span 18; }
+            .gallery-item:nth-child(8) { grid-row: span 21; }
+            .gallery-item:nth-child(9) { grid-row: span 21; }
+            .gallery-item:nth-child(10) { grid-row: span 18; }
+            .gallery-item:nth-child(11) { grid-row: span 12; grid-column: 1 / -1; }
+            .gallery-item:nth-child(12) { grid-row: span 18; }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                grid-auto-rows: 20px;
+            }
+            
+            .gallery-item:nth-child(11) { grid-column: 1; }
+        }
         
         .nav-blur { 
             backdrop-filter: blur(20px);
@@ -200,14 +253,17 @@
         
         <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
             <h2 class="font-playfair text-4xl md:text-6xl lg:text-7xl font-light mb-6 animate-fade-in text-shadow leading-tight">
-                Encontros que transcendem<br class="hidden md:block"> o ordinário
+                Encontros que despertam<br class="hidden md:block"> todos os sentidos
             </h2>
+            <p class="text-lg md:text-xl font-light mb-8 opacity-90 animate-slide-up">
+                Companhia refinada e momentos únicos no coração de São Paulo
+            </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in">
                 <a href="#galeria" class="bg-blush/90 backdrop-blur-sm text-espresso px-8 py-3 rounded-full hover:bg-blush transition-all duration-300 font-medium hover-lift">
-                    EXPLORAR GALERIA
+                    CONHECER GALERIA
                 </a>
                 <a href="#contato" class="border-2 border-white/70 text-white px-8 py-3 rounded-full hover:bg-white/10 transition-all duration-300 font-medium">
-                    AGENDAR ENCONTRO
+                    CONVERSAR COMIGO
                 </a>
             </div>
         </div>
@@ -222,66 +278,68 @@
     <section id="galeria" class="section-padding bg-pearl relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 reveal">
-                <h2 class="font-playfair text-3xl md:text-5xl font-light mb-4 text-espresso">Galeria Exclusiva</h2>
+                <h2 class="font-playfair text-3xl md:text-5xl font-light mb-4 text-espresso">Um Pouco de Mim</h2>
                 <div class="w-20 h-px bg-bronze mx-auto mb-6"></div>
-                <p class="text-cognac/70 text-lg font-light">Momentos capturados em sua essência</p>
+                <p class="text-cognac/70 text-lg font-light max-w-2xl mx-auto">
+                    Cada imagem conta uma história, cada olhar revela um universo. 
+                    Aqui você encontra fragmentos da mulher que sou: elegante, espontânea e intensamente presente.
+                </p>
             </div>
             
-            <div class="gallery-masonry">
-                
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-80" data-aos="fade-up">
-                    <img src="images/gallery/foto1.jpg" alt="Gabi Rocha - Foto 1" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+            <div class="gallery-grid">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto1.jpg" alt="Gabi Rocha - Momento elegante" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
                 
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-72" data-aos="fade-up" data-aos-delay="100">
-                    <img src="images/gallery/foto2.jpg" alt="Gabi Rocha - Foto 2" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto2.jpg" alt="Gabi Rocha - Olhar envolvente" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
                 
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-72" data-aos="fade-up" data-aos-delay="200">
-                    <img src="images/gallery/foto3.jpg" alt="Gabi Rocha - Foto 3" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto3.jpg" alt="Gabi Rocha - Sorriso genuíno" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
                 
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-80" data-aos="fade-up" data-aos-delay="300">
-                    <img src="images/gallery/foto4.jpg" alt="Gabi Rocha - Foto 4" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto4.jpg" alt="Gabi Rocha - Elegância natural" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
                 
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-80" data-aos="fade-up" data-aos-delay="400">
-                    <img src="images/gallery/foto5.jpg" alt="Gabi Rocha - Foto 5" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto5.jpg" alt="Gabi Rocha - Presença marcante" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
                 
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-96" data-aos="fade-up" data-aos-delay="500">
-                    <img src="images/gallery/foto6.jpg" alt="Gabi Rocha - Foto 6" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto6.jpg" alt="Gabi Rocha - Sensualidade discreta" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
                 
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-72" data-aos="fade-up" data-aos-delay="600">
-                    <img src="images/gallery/foto7.jpg" alt="Gabi Rocha - Foto 7" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto7.jpg" alt="Gabi Rocha - Charme natural" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
                 
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-96" data-aos="fade-up" data-aos-delay="700">
-                    <img src="images/gallery/foto8.jpg" alt="Gabi Rocha - Foto 8" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto8.jpg" alt="Gabi Rocha - Doçura e intensidade" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
                 
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-96" data-aos="fade-up" data-aos-delay="800">
-                    <img src="images/gallery/foto9.jpg" alt="Gabi Rocha - Foto 9" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto9.jpg" alt="Gabi Rocha - Momento íntimo" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
                 
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-72" data-aos="fade-up" data-aos-delay="900">
-                    <img src="images/gallery/foto10.jpg" alt="Gabi Rocha - Foto 10" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto10.jpg" alt="Gabi Rocha - Beleza autêntica" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
                 
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-64 col-span-full" data-aos="fade-up" data-aos-delay="1000">
-                    <img src="images/gallery/foto11.jpg" alt="Gabi Rocha - Foto 11" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto11.jpg" alt="Gabi Rocha - Panorama de elegância" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
                 
-                <div class="gallery-item rounded-2xl overflow-hidden mb-4 hover-lift h-72" data-aos="fade-up" data-aos-delay="1100">
-                    <img src="images/gallery/foto12.jpg" alt="Gabi Rocha - Foto 12" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                <div class="gallery-item hover-lift">
+                    <img src="images/gallery/foto12.jpg" alt="Gabi Rocha - Essência feminina" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
             </div>
             
             <div class="text-center mt-12 reveal">
-                <p class="text-cognac/70 mb-6 font-light">Gostou do que viu?</p>
+                <p class="text-cognac/70 mb-6 font-light">Se minha energia chegou até você...</p>
                 <a href="#contato" class="inline-flex items-center gap-2 bg-bronze text-white px-8 py-3 rounded-full hover:bg-cognac transition-all duration-300 hover-lift">
-                    <span class="font-medium">AGENDAR ENCONTRO</span>
+                    <span class="font-medium">VAMOS NOS CONHECER</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
@@ -293,17 +351,21 @@
     <section id="encontros" class="section-padding bg-cream relative">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16 reveal">
-                <h2 class="font-playfair text-3xl md:text-5xl font-light mb-4">Como Funcionam os Encontros</h2>
+                <h2 class="font-playfair text-3xl md:text-5xl font-light mb-4">Nossos Encontros</h2>
                 <div class="w-20 h-px bg-bronze mx-auto mb-6"></div>
+                <p class="text-cognac/70 text-lg font-light max-w-3xl mx-auto">
+                    Cada encontro é planejado com cuidado e atenção aos detalhes. 
+                    Valorizo a qualidade do tempo que passamos juntos e a conexão genuína que criamos.
+                </p>
             </div>
             
             <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
                 <div class="reveal order-2 lg:order-1">
                     <p class="text-cognac mb-6 leading-relaxed text-lg font-light">
-                        Recebo em meu apartamento entre a Consolação e os Jardins, ou me desloco para hotéis e apartamentos com portaria 24h nas regiões que atendo.
+                        Recebo em meu apartamento aconchegante entre a Consolação e os Jardins, um espaço pensado para o nosso conforto e privacidade. Também me desloco para hotéis de qualidade e apartamentos com portaria nas regiões nobres da cidade.
                     </p>
                     <p class="text-cognac mb-8 leading-relaxed text-lg font-light">
-                        Valorizo encontros marcados com antecedência — assim posso me preparar com calma e estar inteira para você.
+                        Prefiro encontros agendados com antecedência, pois assim posso me preparar adequadamente e estar completamente disponível para você. Acredito que os melhores momentos nascem do cuidado e da expectativa compartilhada.
                     </p>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -313,7 +375,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
-                            <h3 class="font-playfair text-lg mb-1">Horários</h3>
+                            <h3 class="font-playfair text-lg mb-1">Disponibilidade</h3>
                             <p class="text-sm text-cognac/70">13h às 22h30</p>
                         </div>
                         
@@ -323,8 +385,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <h3 class="font-playfair text-lg mb-1">Atendimento</h3>
-                            <p class="text-sm text-cognac/70">Com hora marcada</p>
+                            <h3 class="font-playfair text-lg mb-1">Agendamento</h3>
+                            <p class="text-sm text-cognac/70">Sempre com antecedência</p>
                         </div>
                         
                         <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl hover-lift">
@@ -334,7 +396,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 </svg>
                             </div>
-                            <h3 class="font-playfair text-lg mb-1">Local</h3>
+                            <h3 class="font-playfair text-lg mb-1">Localizações</h3>
                             <p class="text-sm text-cognac/70">Consolação • Jardins</p>
                         </div>
                     </div>
@@ -344,7 +406,7 @@
                     <div class="relative max-w-md mx-auto">
                         <div class="absolute -inset-4 bg-gradient-to-r from-blush/20 to-bronze/20 rounded-3xl blur-2xl"></div>
                         <div class="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
-                            <img src="images/profile.jpg" alt="Gabi Rocha - Perfil" class="w-full h-full object-cover loading-placeholder" onload="this.classList.remove('loading-placeholder')">
+                            <img src="images/profile.jpg" alt="Gabi Rocha - Perfil pessoal" class="w-full h-full object-cover loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                         </div>
                     </div>
                 </div>
@@ -353,13 +415,16 @@
             <div class="space-y-6">
                 <div class="bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden reveal">
                     <button onclick="toggleAccordion('valores')" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-nude/30 transition-all duration-300">
-                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Valores & Duração</h3>
+                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Investimento & Tempo</h3>
                         <svg id="valores-icon" class="w-6 h-6 text-bronze transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
                     <div id="valores" class="accordion-content">
                         <div class="px-6 pb-6">
+                            <p class="text-cognac/80 mb-6 font-light leading-relaxed">
+                                Cada momento juntos é um investimento em experiências memoráveis. Os valores refletem não apenas o tempo, mas a qualidade, o cuidado e a exclusividade de nosso encontro.
+                            </p>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <div class="bg-gradient-to-br from-champagne to-nude p-4 rounded-xl text-center hover-lift">
                                     <span class="block text-sm text-cognac/70 mb-1">1 hora</span>
@@ -379,7 +444,7 @@
                                 </div>
                             </div>
                             <p class="text-center text-cognac/60 text-sm mt-4 font-light">
-                                * Valores para atendimento no meu local. Consulte valores para deslocamento.
+                                * Valores para atendimento em meu apartamento. Para deslocamentos, consulte condições especiais.
                             </p>
                         </div>
                     </div>
@@ -387,14 +452,16 @@
                 
                 <div class="bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden reveal">
                     <button onclick="toggleAccordion('regioes')" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-nude/30 transition-all duration-300">
-                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Regiões de Atendimento</h3>
+                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Onde Nos Encontramos</h3>
                         <svg id="regioes-icon" class="w-6 h-6 text-bronze transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
                     <div id="regioes" class="accordion-content">
                         <div class="px-6 pb-6">
-                            <p class="text-cognac/70 mb-4 font-light">Atendo com deslocamento nas seguintes regiões:</p>
+                            <p class="text-cognac/70 mb-4 font-light">
+                                Atendo com deslocamento nas regiões mais exclusivas de São Paulo, sempre priorizando a discrição e o conforto mútuo:
+                            </p>
                             <div class="flex flex-wrap gap-2">
                                 <span class="px-4 py-2 bg-nude/50 rounded-full text-sm text-espresso">Vila Olímpia</span>
                                 <span class="px-4 py-2 bg-nude/50 rounded-full text-sm text-espresso">Itaim Bibi</span>
@@ -402,54 +469,62 @@
                                 <span class="px-4 py-2 bg-nude/50 rounded-full text-sm text-espresso">Brooklin</span>
                                 <span class="px-4 py-2 bg-nude/50 rounded-full text-sm text-espresso">Pinheiros</span>
                                 <span class="px-4 py-2 bg-nude/50 rounded-full text-sm text-espresso">Jardins</span>
-                                <span class="px-4 py-2 bg-blush/30 rounded-full text-sm text-espresso font-medium">Consolação (Meu Local)</span>
+                                <span class="px-4 py-2 bg-blush/30 rounded-full text-sm text-espresso font-medium">Consolação (Meu Espaço)</span>
+                            </div>
+                            <div class="mt-4 p-4 bg-blush/10 rounded-xl">
+                                <p class="text-espresso text-sm font-light">
+                                    <span class="font-medium">Importante:</span> Para deslocamentos, solicito hotéis 4-5 estrelas ou apartamentos com portaria 24h nas regiões mencionadas.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden reveal">
-                    <button onclick="toggleAccordion('regras')" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-nude/30 transition-all duration-300">
-                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Importante Saber</h3>
-                        <svg id="regras-icon" class="w-6 h-6 text-bronze transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button onclick="toggleAccordion('guidelines')" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-nude/30 transition-all duration-300">
+                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Para um Encontro Perfeito</h3>
+                        <svg id="guidelines-icon" class="w-6 h-6 text-bronze transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div id="regras" class="accordion-content">
+                    <div id="guidelines" class="accordion-content">
                         <div class="px-6 pb-6">
+                            <p class="text-cognac/80 mb-6 font-light leading-relaxed">
+                                Alguns cuidados que tornam nosso encontro ainda mais especial e garantem que ambos vivamos uma experiência memorável:
+                            </p>
                             <ul class="space-y-3 text-espresso">
                                 <li class="flex items-start gap-3">
                                     <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Adiantamento de 15% para confirmar o encontro</span>
+                                    <span class="font-light">Confirmo agendamentos mediante sinal de 15% do valor total</span>
                                 </li>
                                 <li class="flex items-start gap-3">
                                     <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Pagamento via PIX ou dinheiro</span>
+                                    <span class="font-light">Aceito pagamento via PIX ou dinheiro no início do encontro</span>
                                 </li>
                                 <li class="flex items-start gap-3">
                                     <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Não atendo pessoas alcoolizadas ou drogadas</span>
+                                    <span class="font-light">Higiene impecável é fundamental para o conforto de ambos</span>
                                 </li>
                                 <li class="flex items-start gap-3">
                                     <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Não faço anal, não finalizo na boca</span>
+                                    <span class="font-light">Não atendo pessoas sob efeito de álcool ou outras substâncias</span>
                                 </li>
                                 <li class="flex items-start gap-3">
                                     <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Não atendo casais ou grupos</span>
+                                    <span class="font-light">Atendo exclusivamente encontros individuais</span>
                                 </li>
                                 <li class="flex items-start gap-3">
                                     <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Higiene impecável é fundamental</span>
+                                    <span class="font-light">Algumas práticas não fazem parte do meu repertório</span>
                                 </li>
                                 <li class="flex items-start gap-3">
                                     <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Discrição total garantida</span>
+                                    <span class="font-light">Discrição absoluta é garantida sempre</span>
                                 </li>
                             </ul>
                             <div class="mt-6 p-4 bg-blush/10 rounded-xl">
                                 <p class="text-espresso text-center font-light">
-                                    <span class="font-medium">Lembre-se:</span> Respeito e educação são a base de qualquer encontro memorável.
+                                    <span class="font-medium">Essencial:</span> O respeito mútuo e a elegância no trato criam a base para momentos verdadeiramente especiais.
                                 </p>
                             </div>
                         </div>
@@ -462,53 +537,70 @@
     <section id="sobre" class="section-padding bg-gradient-to-b from-pearl to-cream relative">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12 reveal">
-                <h2 class="font-playfair text-3xl md:text-5xl font-light mb-4">Quem é Gabi</h2>
+                <h2 class="font-playfair text-3xl md:text-5xl font-light mb-4">A Mulher Por Trás do Sorriso</h2>
                 <div class="w-20 h-px bg-bronze mx-auto mb-6"></div>
+                <p class="text-cognac/70 text-lg font-light max-w-2xl mx-auto">
+                    Cada pessoa tem uma história que a define. A minha é feita de descobertas, transformações e a coragem de escolher meu próprio caminho.
+                </p>
             </div>
             
             <div class="space-y-6">
                 <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden reveal">
-                    <button onclick="toggleAccordion('sobre-mim')" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-nude/30 transition-all duration-300">
-                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Sobre Mim</h3>
-                        <svg id="sobre-mim-icon" class="w-6 h-6 text-bronze transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button onclick="toggleAccordion('personalidade')" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-nude/30 transition-all duration-300">
+                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Quem Eu Sou</h3>
+                        <svg id="personalidade-icon" class="w-6 h-6 text-bronze transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div id="sobre-mim" class="accordion-content active">
+                    <div id="personalidade" class="accordion-content active">
                         <div class="px-6 pb-6">
                             <div class="prose prose-lg max-w-none text-cognac/80 space-y-4 font-light">
-                                <p>Sou uma mulher doce, mas nada óbvia (nem todos chegam nessa camada, hehe). Bem-humorada, curiosa, sempre pronta para aprender e com conversas que vão muito além do comum. Capixaba de certidão, vivendo em São Paulo há mais de três anos.</p>
-                                <p>Estou em formação em Gestão Pública, mas também atuo em uma segunda profissão da qual sou formada. Ela me desafia quase sempre, mas também me encanta.</p>
-                                <p>Meu dia a dia é comum e bem preenchido: entre estudos, trabalho, família, amigos e esportes. Amo o silêncio e o aconchego da minha casa, muito sol entrando pela janela e luzes baixas durante a noite. Um bom vinho, leituras que me envolvem e músicas que me fazem sentir. Meu tempo comigo mesma é precioso, e costumo cuidar dele com carinho e intenção.</p>
-                                <p>Entre os pequenos luxos da vida, um dos meus preferidos é jantar sozinha. Pode parecer solidão para alguns, mas pra mim é uma forma deliciosa de estar comigo mesma. Adoro escolher um bom restaurante, saborear uma taça de Pinot Noir ou Pinot Grigio e simplesmente apreciar o momento.</p>
-                                <p class="italic text-blush font-medium">Talvez por viver assim, de forma tão presente, eu valorize tanto cada encontro.</p>
+                                <p>Sou uma mulher de múltiplas camadas: doce no primeiro encontro, mas com uma profundidade que poucos chegam a descobrir. Tenho um humor que desarma e uma curiosidade genuína pelas pessoas e pelo mundo ao meu redor.</p>
+                                
+                                <p>Capixaba de origem, vivo em São Paulo há mais de três anos e me apaixonei pela energia desta cidade. Divido meu tempo entre os estudos em Gestão Pública e minha segunda formação, que me desafia intelectualmente todos os dias.</p>
+                                
+                                <p>Minha rotina é equilibrada entre trabalho, estudos, família e amigos, mas sempre reservo momentos sagrados para mim mesma. Amo o silêncio de casa, com muito sol entrando pelas janelas durante o dia e luzes suaves à noite. Um bom vinho, livros envolventes e músicas que tocam a alma fazem parte dos meus pequenos luxos diários.</p>
+                                
+                                <p>Um dos meus prazeres favoritos é jantar sozinha em restaurantes especiais. Para muitos pode parecer solidão, mas para mim é uma forma deliciosa de me conectar comigo mesma. Escolho o local com cuidado, peço um Pinot Noir ou Grigio e simplesmente aprecio o momento presente.</p>
+                                
+                                <p class="italic text-blush font-medium">Talvez seja essa presença genuína que me permite valorizar tanto cada encontro que tenho.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden reveal">
-                    <button onclick="toggleAccordion('historia')" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-nude/30 transition-all duration-300">
-                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Como Tudo Começou</h3>
-                        <svg id="historia-icon" class="w-6 h-6 text-bronze transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button onclick="toggleAccordion('jornada')" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-nude/30 transition-all duration-300">
+                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Minha Jornada</h3>
+                        <svg id="jornada-icon" class="w-6 h-6 text-bronze transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div id="historia" class="accordion-content">
+                    <div id="jornada" class="accordion-content">
                         <div class="px-6 pb-6">
                             <div class="prose prose-lg max-w-none text-cognac/80 space-y-4 font-light">
-                                <p>Se tem algo que sempre me acompanhou, foi a intensidade. Desde cedo precisei amadurecer, encarar o mundo por conta própria e acumulei experiências que moldaram quem sou. Talvez por isso nunca me senti confortável com vínculos rasos ou relacionamentos convencionais. Sempre me incomodou a previsibilidade, os gestos mecânicos, as conversas que não saem do lugar.</p>
-                                <p>Enquanto muitos ainda exploravam o básico, eu já buscava profundidade. Algo que me instigasse, que fosse feito de presença, de desejo e de silêncio também. Sempre fui movida pelo novo, pelo diferente, e principalmente por quem me desperta. Adoro estar com alguém que me ensina algo, que aguça minha curiosidade.</p>
-                                <p>E foi aí que entendi: o meu prazer começa muito antes de qualquer toque. Gosto da provocação sutil, do jogo de olhares acompanhado de bons vinhos, da conversa que envolve, do instante em que a mente e o corpo já se entregam sem que seja preciso dizer nada.</p>
-                                <p>Essa busca por encontros mais verdadeiros me levou ao universo sugar, apresentado por uma amiga. E logo me vi envolvida por tudo aquilo. Descobri um espaço onde o desejo e o cuidado podiam caminhar juntos. Onde a leveza não anulava a profundidade. Onde eu podia ser mulher por completo e ainda assim ser tratada com atenção, respeito e valor.</p>
-                                <p>Conheci pessoas incríveis, vivi experiências marcantes, cresci, me envolvi, aprendi. Foi um mergulho delicioso e inesperadamente transformador. Mas como toda história bem vivida, vieram também os aprendizados. No final de 2024, uma decepção me fez encerrar o contato com este universo. Tive a chance de voltar ao previsível. Mas algo dentro de mim ainda se encantava por esse universo.</p>
-                                <p>Foi então que comecei a olhar com mais curiosidade para o mundo das acompanhantes. No início, existiam preconceitos que eu precisei desconstruir. Fui pesquisando, lendo, ouvindo outras mulheres, e aos poucos entendi que esse mundo podia, sim, acolher exatamente o tipo de conexão que eu sempre procurei. Encontrei liberdade, desejo, profundidade e trocas reais.</p>
-                                <p>Percebi que muitos homens também buscavam algo além do óbvio. E isso fez tudo fazer sentido. Sempre me atraiu o prazer de ser cuidada. Não só no toque, mas no olhar atento, na escuta, no gesto que demonstra presença. E sim, parte disso também está em poder viver o melhor da vida.</p>
-                                <p>Um jantar marcante, um presente que revela atenção, uma viagem inesperada, um vestido que veste mais do que o corpo. Não é sobre ser paga. É sobre se sentir valorizada, lembrada, celebrada. Sobre saber que o tempo que escolhi viver ali tem significado.</p>
-                                <p>Depois de muita reflexão, decidi seguir esse caminho à minha maneira. Sem fórmulas, sem pressa, sem superficialidade. Criei um estilo de atendimento que reflete quem sou: seletiva, curiosa, leve, envolvente. Gosto de encontros que deixam marca, que despertam sentidos, que nos fazem sair diferentes do que chegamos.</p>
-                                <p>E se for pra estar ali, que seja por vontade. Dos dois lados. Porque pra mim, o que realmente vale é quando o momento é bom. De verdade.</p>
+                                <p>Desde jovem, a intensidade me acompanha. Precisei amadurecer cedo, enfrentar o mundo de forma independente e isso moldou profundamente quem me tornei. Nunca me contentei com relacionamentos superficiais ou conversas vazias – sempre busquei conexões que me desafiassem e me fizessem crescer.</p>
+                                
+                                <p>Enquanto muitos ainda exploravam o básico, eu já buscava profundidade emocional e intelectual. Sempre fui atraída por pessoas que me ensinam algo novo, que aguçam minha curiosidade e me fazem ver o mundo por perspectivas diferentes.</p>
+                                
+                                <p>Com o tempo, compreendi que meu prazer começa muito antes do toque físico. Adoro a arte da conquista sutil, o jogo de olhares acompanhado de uma boa conversa, o momento em que a química se estabelece naturalmente, sem pressa ou pressão.</p>
+                                
+                                <p>Foi através de uma amiga que conheci o universo sugar, e rapidamente me encantei com essa dinâmica. Descobri um espaço onde o desejo caminha lado a lado com o cuidado, onde a leveza não compromete a autenticidade. Vivi experiências transformadoras, conheci pessoas incríveis e aprendi muito sobre mim mesma.</p>
+                                
+                                <p>No final de 2024, após uma decepção marcante, pausei minha participação nesse universo. Tive a oportunidade de voltar ao convencional, mas algo dentro de mim permanecia conectado àquele mundo de possibilidades.</p>
+                                
+                                <p>Foi então que comecei a explorar o universo das acompanhantes com olhos livres de preconceitos. Através de pesquisas, conversas e muito autoconhecimento, percebi que este caminho poderia acolher exatamente o tipo de conexão que sempre procurei.</p>
+                                
+                                <p>Descobri que muitos homens também buscam algo além do óbvio – companhia inteligente, momentos genuínos e o prazer de cuidar e ser cuidado. Isso fez todo sentido para mim, pois sempre me atraiu a sensação de ser valorizada não apenas fisicamente, mas em toda minha essência.</p>
+                                
+                                <p>Não se trata apenas do aspecto financeiro, mas da experiência completa: um jantar memorável, um presente que demonstra atenção, uma viagem inesperada, momentos que ficam na memória. É sobre se sentir celebrada, lembrada e verdadeiramente vista.</p>
+                                
+                                <p>Decidi seguir este caminho à minha maneira: sem fórmulas prontas, sem superficialidade, sempre priorizando a qualidade sobre a quantidade. Criei meu próprio estilo de atendimento, que reflete quem sou: seletiva, genuína, envolvente.</p>
+                                
+                                <p>Acredito em encontros que deixam marcas positivas, que nos transformam sutilmente, que nos fazem sair diferentes de como chegamos. Para mim, o que realmente importa é quando ambos saem do encontro com a sensação de que valeu a pena – de verdade.</p>
+                                
                                 <div class="mt-6 p-4 bg-blush/10 rounded-xl text-center">
-                                    <p class="text-blush text-lg italic">Fico muito feliz que você tenha chegado até aqui! Se tudo o que escrevi faz sentido pra você, espero te encontrar em breve. Vai ser um prazer compartilhar minha companhia com você! ❤️</p>
+                                    <p class="text-blush text-lg italic">Se você chegou até aqui e minha história ressoa com você, será um prazer compartilhar minha companhia. Espero que possamos criar momentos únicos juntos! ❤️</p>
                                 </div>
                             </div>
                         </div>
@@ -521,11 +613,13 @@
     <section id="contato" class="section-padding bg-espresso text-white relative overflow-hidden">
         <div class="max-w-3xl mx-auto text-center relative z-10">
             <div class="reveal">
-                <h2 class="font-playfair text-3xl md:text-5xl font-light mb-6 animate-fade-in">Pronta para nosso encontro?</h2>
-                <p class="text-xl font-light mb-8 opacity-80 animate-slide-up">Entre em contato e vamos criar momentos únicos juntos</p>
+                <h2 class="font-playfair text-3xl md:text-5xl font-light mb-6 animate-fade-in">Vamos Nos Conhecer?</h2>
+                <p class="text-xl font-light mb-8 opacity-80 animate-slide-up">
+                    Estou ansiosa para conhecer você e criar momentos especiais juntos
+                </p>
                 
                 <div class="mb-8 space-y-2">
-                    <p class="text-lg font-light opacity-70">Atendimento de Segunda a Sábado</p>
+                    <p class="text-lg font-light opacity-70">Disponível de Segunda a Sábado</p>
                     <p class="text-2xl font-playfair">13h às 22h30</p>
                 </div>
                 
@@ -546,7 +640,7 @@
                 
                 <div class="p-6 bg-white/10 backdrop-blur-sm rounded-xl max-w-xl mx-auto">
                     <p class="text-sm opacity-70 font-light">
-                        Ao entrar em contato, por favor se apresente com seu nome, idade e o que busca em nosso encontro. Mensagens respeitosas têm prioridade.
+                        Ao entrar em contato, apresente-se com seu nome, idade e conte-me um pouco sobre o que busca em nosso encontro. Mensagens educadas e respeitosas sempre têm prioridade na minha agenda.
                     </p>
                 </div>
             </div>
@@ -680,27 +774,6 @@
                 });
             });
 
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            const screenWidth = window.innerWidth;
-            
-            if (screenWidth >= 768) {
-                const columns = screenWidth >= 1024 ? 3 : 2;
-                const columnHeights = Array(columns).fill(0);
-                
-                galleryItems.forEach((item, index) => {
-                    const shortestColumn = columnHeights.indexOf(Math.min(...columnHeights));
-                    item.style.order = shortestColumn + (Math.floor(index / columns) * columns);
-                    
-                    const itemHeight = item.offsetHeight;
-                    columnHeights[shortestColumn] += itemHeight + 16;
-                });
-                
-                const galleryContainer = document.querySelector('.gallery-masonry');
-                galleryContainer.style.display = 'grid';
-                galleryContainer.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
-                galleryContainer.style.gap = '16px';
-            }
-
             let lastScrollTop = 0;
             const contactFloat = document.querySelector('.contact-float');
             
@@ -726,37 +799,5 @@
             }
         });
     </script>
-
-    <style>
-        .gallery-masonry {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        @media (min-width: 768px) {
-            .gallery-masonry {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: min-content;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .gallery-masonry {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .gallery-item:nth-child(11) {
-            grid-column: 1 / -1;
-        }
-
-        @media (max-width: 767px) {
-            .gallery-item:nth-child(11) {
-                grid-column: unset;
-            }
-        }
-    </style>
 </body>
 </html>
