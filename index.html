@@ -39,7 +39,8 @@
                         'text-reveal': 'textReveal 1.5s ease-out forwards',
                         'shine': 'shine 3s ease-in-out infinite',
                         'morph': 'morph 8s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite'
+                        'glow': 'glow 2s ease-in-out infinite',
+                        'shimmer': 'shimmer 2.5s ease-in-out infinite'
                     },
                     backgroundImage: {
                         'luxury-gradient': 'linear-gradient(135deg, #F5E6D3 0%, #E8B4B8 50%, #F5E6D3 100%)',
@@ -59,6 +60,10 @@
         @keyframes shine { 0%, 100% { opacity: 0.5; left: -100%; } 50% { opacity: 1; left: 100%; } }
         @keyframes morph { 0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; } }
         @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(232, 180, 184, 0.5); } 50% { box-shadow: 0 0 40px rgba(232, 180, 184, 0.8); } }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
         
         .parallax { transform: translateZ(0); will-change: transform; }
         .glass { backdrop-filter: blur(20px) saturate(180%); background: rgba(255, 255, 240, 0.75); }
@@ -66,25 +71,45 @@
         .magnetic { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
         .reveal { opacity: 0; }
         .reveal.active { animation: slide-up 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        .accordion-content { max-height: 0; overflow: hidden; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .accordion-content.active { max-height: 3000px; padding-bottom: 2rem; }
+        
+        /* Accordion corrigido */
+        .accordion-content { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+        .accordion-content.active { 
+            max-height: 3000px;
+            opacity: 1;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease-in-out 0.2s;
+        }
         
         .gallery-item { 
             position: relative;
             overflow: hidden;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            background: linear-gradient(135deg, #F5E6D3 0%, #E8B4B8 100%);
         }
         .gallery-item::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
             transform: translateX(-100%);
             transition: transform 0.6s;
         }
         .gallery-item:hover::before { transform: translateX(100%); }
-        .gallery-item:hover { transform: scale(1.02); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+        .gallery-item:hover { transform: scale(1.05); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); z-index: 10; }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gallery-item:hover img { transform: scale(1.1); }
         
         .text-gradient { 
             background: linear-gradient(135deg, #B87333 0%, #E8B4B8 50%, #B87333 100%);
@@ -135,7 +160,7 @@
         .photo-overlay { 
             position: absolute; 
             inset: 0; 
-            background: linear-gradient(to top, rgba(44,24,16,0.6), transparent);
+            background: linear-gradient(to top, rgba(44,24,16,0.7), transparent);
             opacity: 0;
             transition: opacity 0.4s;
             display: flex;
@@ -227,11 +252,54 @@
         .animation-delay-2000 { animation-delay: 2s; }
         .animation-delay-3000 { animation-delay: 3s; }
         .animation-delay-4000 { animation-delay: 4s; }
+        
+        /* Shimmer effect para cards */
+        .shimmer {
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2.5s ease-in-out infinite;
+        }
+        
+        /* Seções visíveis por padrão */
+        section {
+            display: block !important;
+            visibility: visible !important;
+        }
+        
+        /* Gallery masonry mobile-first */
+        @media (max-width: 640px) {
+            .gallery-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .gallery-item {
+                width: 100%;
+                height: 280px;
+            }
+        }
+        
+        /* Enhanced hover effects */
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -8px rgba(0,0,0,0.2);
+        }
+        
+        /* Loading placeholder para imagens */
+        .image-loading {
+            background: linear-gradient(90deg, #F5E6D3 25%, #E8B4B8 50%, #F5E6D3 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="bg-ivory text-ebony font-poppins overflow-x-hidden">
     <div class="fixed inset-0 floating-gradient opacity-10 pointer-events-none"></div>
     
+    <!-- Navigation -->
     <nav class="fixed top-0 w-full nav-blur z-50 transition-all duration-500" id="navbar">
         <div class="container mx-auto px-4 py-5">
             <div class="flex justify-between items-center">
@@ -264,10 +332,10 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <!-- Imagem de fundo -->
         <div class="absolute inset-0 z-0">
-            <img src="images/hero.jpg" alt="Gabi Rocha" class="w-full h-full object-cover">
+            <img src="images/hero.jpg" alt="Gabi Rocha" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
             <div class="absolute inset-0 hero-overlay"></div>
         </div>
         
@@ -297,6 +365,7 @@
         </div>
     </section>
 
+    <!-- Gallery Section - Corrigida -->
     <section id="galeria" class="py-24 bg-champagne-light relative overflow-hidden">
         <div class="absolute top-0 right-0 w-96 h-96 bg-rose-gold/20 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-copper/20 rounded-full blur-3xl"></div>
@@ -309,63 +378,92 @@
                     <span class="text-copper text-2xl">◈</span>
                     <div class="h-px w-20 bg-copper"></div>
                 </div>
+                <p class="text-mahogany/70 mt-6 text-lg font-light">Uma coleção de momentos capturados em sua essência</p>
             </div>
             
-            <!-- Galeria com imagens locais -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
-                <div class="gallery-item aspect-[3/4] rounded-lg col-span-1 row-span-2">
-                    <img src="images/gallery/foto1.jpg" alt="Gabi Rocha - Foto 1" class="w-full h-full object-cover rounded-lg">
+            <!-- Galeria Responsiva Mobile-First -->
+            <div class="gallery-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+                <!-- Foto 1 - Destaque -->
+                <div class="gallery-item sm:col-span-2 sm:row-span-2 h-80 sm:h-auto rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto1.jpg" alt="Gabi Rocha - Foto 1" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
                     <div class="photo-overlay">
-                        <span class="text-ivory text-sm tracking-wider font-light">EXCLUSIVE</span>
+                        <span class="text-ivory text-sm tracking-wider font-light shimmer">EXCLUSIVE</span>
                     </div>
                 </div>
-                <div class="gallery-item aspect-[4/3] rounded-lg">
-                    <img src="images/gallery/foto2.jpg" alt="Gabi Rocha - Foto 2" class="w-full h-full object-cover rounded-lg">
+                
+                <!-- Fotos 2 e 3 -->
+                <div class="gallery-item h-60 sm:h-48 rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto2.jpg" alt="Gabi Rocha - Foto 2" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
                 </div>
-                <div class="gallery-item aspect-[4/3] rounded-lg">
-                    <img src="images/gallery/foto3.jpg" alt="Gabi Rocha - Foto 3" class="w-full h-full object-cover rounded-lg">
+                <div class="gallery-item h-60 sm:h-48 rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto3.jpg" alt="Gabi Rocha - Foto 3" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
                 </div>
-                <div class="gallery-item aspect-[16/9] rounded-lg col-span-1 md:col-span-2">
-                    <img src="images/gallery/foto4.jpg" alt="Gabi Rocha - Foto 4" class="w-full h-full object-cover rounded-lg">
-                </div>
-                <div class="gallery-item aspect-square rounded-lg">
-                    <img src="images/gallery/foto5.jpg" alt="Gabi Rocha - Foto 5" class="w-full h-full object-cover rounded-lg">
-                </div>
-                <div class="gallery-item aspect-[3/4] rounded-lg row-span-2">
-                    <img src="images/gallery/foto6.jpg" alt="Gabi Rocha - Foto 6" class="w-full h-full object-cover rounded-lg">
+                
+                <!-- Foto 4 - Wide -->
+                <div class="gallery-item sm:col-span-2 h-60 sm:h-52 rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto4.jpg" alt="Gabi Rocha - Foto 4" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
                     <div class="photo-overlay">
-                        <span class="text-ivory text-sm tracking-wider font-light">ELEGANCE</span>
+                        <span class="text-ivory text-sm tracking-wider font-light">MOMENTS</span>
                     </div>
                 </div>
-                <div class="gallery-item aspect-square rounded-lg">
-                    <img src="images/gallery/foto7.jpg" alt="Gabi Rocha - Foto 7" class="w-full h-full object-cover rounded-lg">
+                
+                <!-- Fotos 5 e 6 -->
+                <div class="gallery-item h-60 sm:h-64 rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto5.jpg" alt="Gabi Rocha - Foto 5" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
                 </div>
-                <div class="gallery-item aspect-[4/3] rounded-lg">
-                    <img src="images/gallery/foto8.jpg" alt="Gabi Rocha - Foto 8" class="w-full h-full object-cover rounded-lg">
+                <div class="gallery-item h-60 sm:h-64 rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto6.jpg" alt="Gabi Rocha - Foto 6" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
                 </div>
-                <div class="gallery-item aspect-[3/4] rounded-lg col-span-1 md:col-span-2 row-span-2">
-                    <img src="images/gallery/foto9.jpg" alt="Gabi Rocha - Foto 9" class="w-full h-full object-cover rounded-lg">
+                
+                <!-- Foto 7 - Tall -->
+                <div class="gallery-item sm:row-span-2 h-80 sm:h-auto rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto7.jpg" alt="Gabi Rocha - Foto 7" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
+                    <div class="photo-overlay">
+                        <span class="text-ivory text-sm tracking-wider font-light shimmer">ELEGANCE</span>
+                    </div>
+                </div>
+                
+                <!-- Fotos 8 e 9 -->
+                <div class="gallery-item h-60 sm:h-48 rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto8.jpg" alt="Gabi Rocha - Foto 8" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
+                </div>
+                <div class="gallery-item h-60 sm:h-48 rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto9.jpg" alt="Gabi Rocha - Foto 9" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
+                </div>
+                
+                <!-- Fotos 10, 11 e 12 -->
+                <div class="gallery-item h-60 sm:h-64 rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto10.jpg" alt="Gabi Rocha - Foto 10" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
+                </div>
+                <div class="gallery-item sm:col-span-2 h-60 sm:h-64 rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto11.jpg" alt="Gabi Rocha - Foto 11" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
                     <div class="photo-overlay">
                         <span class="text-ivory text-sm tracking-wider font-light">SOPHISTICATION</span>
                     </div>
                 </div>
-                <div class="gallery-item aspect-square rounded-lg">
-                    <img src="images/gallery/foto10.jpg" alt="Gabi Rocha - Foto 10" class="w-full h-full object-cover rounded-lg">
+                <div class="gallery-item h-60 sm:h-64 rounded-xl overflow-hidden hover-lift">
+                    <img src="images/gallery/foto12.jpg" alt="Gabi Rocha - Foto 12" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
                 </div>
-                <div class="gallery-item aspect-[4/3] rounded-lg">
-                    <img src="images/gallery/foto11.jpg" alt="Gabi Rocha - Foto 11" class="w-full h-full object-cover rounded-lg">
-                </div>
-                <div class="gallery-item aspect-square rounded-lg">
-                    <img src="images/gallery/foto12.jpg" alt="Gabi Rocha - Foto 12" class="w-full h-full object-cover rounded-lg">
-                </div>
+            </div>
+            
+            <!-- Call to Action -->
+            <div class="text-center mt-16">
+                <p class="text-mahogany/70 text-lg mb-6 font-light">Gostou do que viu?</p>
+                <a href="#contato" class="inline-flex items-center gap-3 bg-copper text-ivory px-8 py-4 rounded-full hover:bg-mahogany transition-all duration-300 cta-glow">
+                    <span class="font-medium tracking-wider">AGENDAR ENCONTRO</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
 
+    <!-- Encontros Section - Corrigida -->
     <section id="encontros" class="py-24 bg-ivory relative overflow-hidden">
         <div class="absolute inset-0 opacity-5">
-            <div class="absolute top-10 left-10 w-64 h-64 border border-copper rounded-full"></div>
-            <div class="absolute bottom-10 right-10 w-96 h-96 border border-rose-gold rounded-full"></div>
+            <div class="absolute top-10 left-10 w-64 h-64 border border-copper rounded-full animate-pulse-slow"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 border border-rose-gold rounded-full animate-pulse-slow animation-delay-2000"></div>
         </div>
         
         <div class="container mx-auto px-4 relative z-10">
@@ -378,6 +476,8 @@
                         <div class="h-px w-20 bg-copper"></div>
                     </div>
                 </div>
+                
+                <!-- Info Grid -->
                 <div class="grid lg:grid-cols-2 gap-16 items-center mb-20">
                     <div class="reveal order-2 lg:order-1">
                         <p class="text-mahogany mb-6 leading-relaxed text-lg font-light">
@@ -386,18 +486,18 @@
                         <p class="text-mahogany mb-10 leading-relaxed text-lg font-light">
                             Valorizo encontros marcados com antecedência — assim posso me preparar com calma e estar inteira para você.
                         </p>
-                        <div class="grid grid-cols-3 gap-4">
-                            <div class="text-center p-6 premium-card rounded-xl hover:transform hover:-translate-y-1 transition-all duration-300">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="text-center p-6 premium-card rounded-xl hover-lift">
                                 <span class="text-3xl text-rose-gold mb-3 block animate-pulse-slow">◈</span>
                                 <h3 class="font-bodoni text-lg mb-1">Horários</h3>
                                 <p class="text-sm text-mahogany/70">13h às 22h30</p>
                             </div>
-                            <div class="text-center p-6 premium-card rounded-xl hover:transform hover:-translate-y-1 transition-all duration-300">
+                            <div class="text-center p-6 premium-card rounded-xl hover-lift">
                                 <span class="text-3xl text-rose-gold mb-3 block animate-pulse-slow animation-delay-1000">◈</span>
                                 <h3 class="font-bodoni text-lg mb-1">Atendimento</h3>
                                 <p class="text-sm text-mahogany/70">Com hora marcada</p>
                             </div>
-                            <div class="text-center p-6 premium-card rounded-xl hover:transform hover:-translate-y-1 transition-all duration-300">
+                            <div class="text-center p-6 premium-card rounded-xl hover-lift">
                                 <span class="text-3xl text-rose-gold mb-3 block animate-pulse-slow animation-delay-2000">◈</span>
                                 <h3 class="font-bodoni text-lg mb-1">Local</h3>
                                 <p class="text-sm text-mahogany/70">Consolação • Jardins</p>
@@ -408,75 +508,119 @@
                         <div class="relative">
                             <div class="absolute -inset-4 bg-gradient-to-r from-rose-gold/20 to-copper/20 rounded-2xl blur-2xl"></div>
                             <div class="relative w-full aspect-[3/4] rounded-2xl shadow-2xl luxury-border overflow-hidden">
-                                <img src="images/profile.jpg" alt="Gabi Rocha - Perfil" class="w-full h-full object-cover">
+                                <img src="images/profile.jpg" alt="Gabi Rocha - Perfil" class="w-full h-full object-cover image-loading" onload="this.classList.remove('image-loading')">
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Accordions - Corrigidos -->
                 <div class="space-y-6">
+                    <!-- Valores Accordion -->
                     <div class="premium-card rounded-2xl shadow-lg overflow-hidden reveal">
                         <button onclick="toggleAccordion('valores')" class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-sand/30 transition-all duration-300">
-                            <h3 class="font-bodoni text-3xl text-mahogany">Valores & Duração</h3>
+                            <h3 class="font-bodoni text-2xl md:text-3xl text-mahogany">Valores & Duração</h3>
                             <svg id="valores-icon" class="w-6 h-6 text-copper transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
                             </svg>
                         </button>
-                        <div id="valores" class="accordion-content px-8">
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pb-8">
-                                <div class="bg-gradient-to-br from-champagne-light to-sand p-6 rounded-xl text-center hover:transform hover:scale-105 transition-all duration-300">
-                                    <span class="block text-sm text-mahogany/70 mb-1">1 hora</span>
-                                    <span class="block text-2xl font-bodoni text-mahogany">R$ 900</span>
+                        <div id="valores" class="accordion-content">
+                            <div class="px-8 pb-8">
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <div class="bg-gradient-to-br from-champagne-light to-sand p-6 rounded-xl text-center hover-lift">
+                                        <span class="block text-sm text-mahogany/70 mb-1">1 hora</span>
+                                        <span class="block text-2xl font-bodoni text-mahogany">R$ 900</span>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-champagne-light to-sand p-6 rounded-xl text-center hover-lift">
+                                        <span class="block text-sm text-mahogany/70 mb-1">2 horas</span>
+                                        <span class="block text-2xl font-bodoni text-mahogany">R$ 1.600</span>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-champagne-light to-sand p-6 rounded-xl text-center hover-lift">
+                                        <span class="block text-sm text-mahogany/70 mb-1">3 horas</span>
+                                        <span class="block text-2xl font-bodoni text-mahogany">R$ 2.400</span>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-rose-gold/30 to-copper/30 p-6 rounded-xl text-center hover-lift shimmer">
+                                        <span class="block text-sm text-mahogany/70 mb-1">Pernoite (12h)</span>
+                                        <span class="block text-2xl font-bodoni text-mahogany">R$ 7.000</span>
+                                    </div>
                                 </div>
-                                <div class="bg-gradient-to-br from-champagne-light to-sand p-6 rounded-xl text-center hover:transform hover:scale-105 transition-all duration-300">
-                                    <span class="block text-sm text-mahogany/70 mb-1">2 horas</span>
-                                    <span class="block text-2xl font-bodoni text-mahogany">R$ 1.600</span>
-                                </div>
-                                <div class="bg-gradient-to-br from-champagne-light to-sand p-6 rounded-xl text-center hover:transform hover:scale-105 transition-all duration-300">
-                                    <span class="block text-sm text-mahogany/70 mb-1">3 horas</span>
-                                    <span class="block text-2xl font-bodoni text-mahogany">R$ 2.400</span>
-                                </div>
-                                <div class="bg-gradient-to-br from-rose-gold/30 to-copper/30 p-6 rounded-xl text-center hover:transform hover:scale-105 transition-all duration-300">
-                                    <span class="block text-sm text-mahogany/70 mb-1">Pernoite (12h)</span>
-                                    <span class="block text-2xl font-bodoni text-mahogany">R$ 7.000</span>
-                                </div>
+                                <p class="text-center text-mahogany/60 text-sm mt-6 font-light">
+                                    * Valores para atendimento no meu local. Consulte valores para deslocamento.
+                                </p>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Regiões Accordion -->
                     <div class="premium-card rounded-2xl shadow-lg overflow-hidden reveal">
                         <button onclick="toggleAccordion('regioes')" class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-sand/30 transition-all duration-300">
-                            <h3 class="font-bodoni text-3xl text-mahogany">Regiões de Atendimento</h3>
+                            <h3 class="font-bodoni text-2xl md:text-3xl text-mahogany">Regiões de Atendimento</h3>
                             <svg id="regioes-icon" class="w-6 h-6 text-copper transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
                             </svg>
                         </button>
-                        <div id="regioes" class="accordion-content px-8">
-                            <div class="flex flex-wrap gap-3 pb-8">
-                                <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany">Vila Olímpia</span>
-                                <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany">Itaim Bibi</span>
-                                <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany">Vila Mariana</span>
-                                <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany">Brooklin</span>
-                                <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany">Pinheiros</span>
-                                <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany">Jardins</span>
+                        <div id="regioes" class="accordion-content">
+                            <div class="px-8 pb-8">
+                                <p class="text-mahogany/70 mb-6 font-light">Atendo com deslocamento nas seguintes regiões:</p>
+                                <div class="flex flex-wrap gap-3">
+                                    <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany hover:bg-sand/70 transition-colors">Vila Olímpia</span>
+                                    <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany hover:bg-sand/70 transition-colors">Itaim Bibi</span>
+                                    <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany hover:bg-sand/70 transition-colors">Vila Mariana</span>
+                                    <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany hover:bg-sand/70 transition-colors">Brooklin</span>
+                                    <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany hover:bg-sand/70 transition-colors">Pinheiros</span>
+                                    <span class="px-6 py-3 bg-sand/50 rounded-full text-mahogany hover:bg-sand/70 transition-colors">Jardins</span>
+                                    <span class="px-6 py-3 bg-rose-gold/30 rounded-full text-mahogany font-medium">Consolação (Meu Local)</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Regras Accordion -->
                     <div class="premium-card rounded-2xl shadow-lg overflow-hidden reveal">
                         <button onclick="toggleAccordion('regras')" class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-sand/30 transition-all duration-300">
-                            <h3 class="font-bodoni text-3xl text-mahogany">Importante Saber</h3>
+                            <h3 class="font-bodoni text-2xl md:text-3xl text-mahogany">Importante Saber</h3>
                             <svg id="regras-icon" class="w-6 h-6 text-copper transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
                             </svg>
                         </button>
-                        <div id="regras" class="accordion-content px-8">
-                            <ul class="space-y-4 text-mahogany pb-8">
-                                <li class="flex items-start"><span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span><span class="text-lg font-light">Adiantamento de 15% para confirmar o encontro</span></li>
-                                <li class="flex items-start"><span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span><span class="text-lg font-light">Pagamento via PIX ou dinheiro</span></li>
-                                <li class="flex items-start"><span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span><span class="text-lg font-light">Não atendo pessoas alcoolizadas ou drogadas</span></li>
-                                <li class="flex items-start"><span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span><span class="text-lg font-light">Não faço anal, não finalizo na boca</span></li>
-                                <li class="flex items-start"><span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span><span class="text-lg font-light">Não atendo casais ou grupos</span></li>
-                                <li class="flex items-start"><span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span><span class="text-lg font-light">Higiene impecável é fundamental</span></li>
-                                <li class="flex items-start"><span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span><span class="text-lg font-light">Discrição total garantida</span></li>
-                            </ul>
+                        <div id="regras" class="accordion-content">
+                            <div class="px-8 pb-8">
+                                <ul class="space-y-4 text-mahogany">
+                                    <li class="flex items-start">
+                                        <span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span>
+                                        <span class="text-lg font-light">Adiantamento de 15% para confirmar o encontro</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span>
+                                        <span class="text-lg font-light">Pagamento via PIX ou dinheiro</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span>
+                                        <span class="text-lg font-light">Não atendo pessoas alcoolizadas ou drogadas</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span>
+                                        <span class="text-lg font-light">Não faço anal, não finalizo na boca</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span>
+                                        <span class="text-lg font-light">Não atendo casais ou grupos</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span>
+                                        <span class="text-lg font-light">Higiene impecável é fundamental</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-rose-gold text-xl mr-4 mt-0.5">◈</span>
+                                        <span class="text-lg font-light">Discrição total garantida</span>
+                                    </li>
+                                </ul>
+                                <div class="mt-8 p-6 bg-rose-gold/10 rounded-xl">
+                                    <p class="text-mahogany text-center font-light">
+                                        <span class="font-medium">Lembre-se:</span> Respeito e educação são a base de qualquer encontro memorável.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -484,6 +628,7 @@
         </div>
     </section>
 
+    <!-- Sobre Section - Corrigida -->
     <section id="sobre" class="py-24 bg-gradient-to-b from-champagne-light to-ivory relative overflow-hidden">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute top-20 right-20 w-96 h-96 border-2 border-rose-gold rounded-full animate-pulse-slow"></div>
@@ -491,43 +636,61 @@
         
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="font-bodoni text-5xl md:text-6xl font-light mb-6">Quem é Gabi</h2>
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="h-px w-20 bg-copper"></div>
+                        <span class="text-copper text-2xl">◈</span>
+                        <div class="h-px w-20 bg-copper"></div>
+                    </div>
+                </div>
+                
                 <div class="space-y-6">
+                    <!-- Sobre Mim Accordion -->
                     <div class="premium-card rounded-2xl shadow-xl overflow-hidden reveal">
                         <button onclick="toggleAccordion('sobre-mim')" class="w-full px-8 py-8 text-left flex justify-between items-center hover:bg-sand/30 transition-all duration-300">
-                            <h3 class="font-bodoni text-4xl text-mahogany">Sobre Mim</h3>
-                            <svg id="sobre-mim-icon" class="w-6 h-6 text-copper transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <h3 class="font-bodoni text-3xl md:text-4xl text-mahogany">Sobre Mim</h3>
+                            <svg id="sobre-mim-icon" class="w-6 h-6 text-copper transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
                             </svg>
                         </button>
-                        <div id="sobre-mim" class="accordion-content px-8">
-                            <div class="prose prose-lg max-w-none text-mahogany/80 space-y-4 font-light">
-                                <p>Sou uma mulher doce, mas nada óbvia (nem todos chegam nessa camada, hehe). Bem-humorada, curiosa, sempre pronta para aprender e com conversas que vão muito além do comum. Capixaba de certidão, vivendo em São Paulo há mais de três anos.</p>
-                                <p>Estou em formação em Gestão Pública, mas também atuo em uma segunda profissão da qual sou formada. Ela me desafia quase sempre, mas também me encanta.</p>
-                                <p>Meu dia a dia é comum e bem preenchido: entre estudos, trabalho, família, amigos e esportes. Amo o silêncio e o aconchego da minha casa, muito sol entrando pela janela e luzes baixas durante a noite. Um bom vinho, leituras que me envolvem e músicas que me fazem sentir. Meu tempo comigo mesma é precioso, e costumo cuidar dele com carinho e intenção.</p>
-                                <p>Entre os pequenos luxos da vida, um dos meus preferidos é jantar sozinha. Pode parecer solidão para alguns, mas pra mim é uma forma deliciosa de estar comigo mesma. Adoro escolher um bom restaurante, saborear uma taça de Pinot Noir ou Pinot Grigio e simplesmente apreciar o momento.</p>
-                                <p>Talvez por viver assim, de forma tão presente, eu valorize tanto cada encontro.</p>
+                        <div id="sobre-mim" class="accordion-content active">
+                            <div class="px-8 pb-8">
+                                <div class="prose prose-lg max-w-none text-mahogany/80 space-y-4 font-light">
+                                    <p>Sou uma mulher doce, mas nada óbvia (nem todos chegam nessa camada, hehe). Bem-humorada, curiosa, sempre pronta para aprender e com conversas que vão muito além do comum. Capixaba de certidão, vivendo em São Paulo há mais de três anos.</p>
+                                    <p>Estou em formação em Gestão Pública, mas também atuo em uma segunda profissão da qual sou formada. Ela me desafia quase sempre, mas também me encanta.</p>
+                                    <p>Meu dia a dia é comum e bem preenchido: entre estudos, trabalho, família, amigos e esportes. Amo o silêncio e o aconchego da minha casa, muito sol entrando pela janela e luzes baixas durante a noite. Um bom vinho, leituras que me envolvem e músicas que me fazem sentir. Meu tempo comigo mesma é precioso, e costumo cuidar dele com carinho e intenção.</p>
+                                    <p>Entre os pequenos luxos da vida, um dos meus preferidos é jantar sozinha. Pode parecer solidão para alguns, mas pra mim é uma forma deliciosa de estar comigo mesma. Adoro escolher um bom restaurante, saborear uma taça de Pinot Noir ou Pinot Grigio e simplesmente apreciar o momento.</p>
+                                    <p class="italic text-rose-gold">Talvez por viver assim, de forma tão presente, eu valorize tanto cada encontro.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- História Accordion -->
                     <div class="premium-card rounded-2xl shadow-xl overflow-hidden reveal">
                         <button onclick="toggleAccordion('historia')" class="w-full px-8 py-8 text-left flex justify-between items-center hover:bg-sand/30 transition-all duration-300">
-                            <h3 class="font-bodoni text-4xl text-mahogany">Como Tudo Começou</h3>
+                            <h3 class="font-bodoni text-3xl md:text-4xl text-mahogany">Como Tudo Começou</h3>
                             <svg id="historia-icon" class="w-6 h-6 text-copper transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
                             </svg>
                         </button>
-                        <div id="historia" class="accordion-content px-8">
-                            <div class="prose prose-lg max-w-none text-mahogany/80 space-y-4 font-light">
-                                <p>Há algo de intenso em mim desde sempre. Quando criança, já sabia amadurecer rápido demais, sair de casa cedo e acumular bagagem. Moldei-me como me relaciono — sempre senti que não me encaixava com pessoas da minha geração.</p>
-                                <p>Enquanto a maioria ainda descobria o mundo, eu buscava algo mais profundo, mais intenso na vida e nos relacionamentos. Sempre fui movida pelo novo, pelo diferente... Adoro estar com quem me ensina, que desperta minha curiosidade.</p>
-                                <p>Foi aí que percebi: isso estava diretamente ligado ao meu prazer. Porque pra mim, tesão começa muito antes de qualquer toque. Não é só química, é conexão. É aquele momento em que a conversa envolve tanto que a mente e o corpo já estão entregues.</p>
-                                <p>Busquei experiências de verdade que, na maioria das vezes, acabavam em frustração. As relações hoje são cada vez mais banais. Foi então que uma amiga me apresentou a este universo, e quando entrei, simplesmente adorei.</p>
-                                <p>Finalmente havia encontrado algo que fazia sentido: vivi momentos incríveis, fiz amigos, me apaixonei, aprendi sobre negócios, conheci lugares e tive encontros que foram muito além do óbvio. Mas a vida tem dessas — entre tantas experiências boas, também veio uma decepção.</p>
-                                <p>No final de 2024, me vi diante de uma escolha: poderia simplesmente parar por ali ou voltar para o convencional... mas esse mundo ainda me encanta. E sendo sincera, sempre gostei do prazer de ser cuidada — não só no sentido sexual, mas também financeiramente.</p>
-                                <p>Foi aí que conheci a explorar novos caminhos e decidi estudar mais sobre o universo das acompanhantes. Desde o início, sabia que não queria seguir o caminho tradicional. O dinheiro nesta profissão tem seus encantos, claro, mas gosto de pensar que sou paga para proporcionar uma experiência única, para entregar o melhor momento.</p>
-                                <p>Sem a burocracia e tudo que vem junto com uma relação "convencional". Depois de muita pesquisa, leituras, conversas e reflexões, decidi criar meu próprio estilo de atendimento. Algo único, que me permitisse viver essa troca, me envolver de verdade e ser valorizada por isso.</p>
-                                <p>E assim, uni tudo que me faz bem: prazer, conexão, experiências e... dinheiro! Porque convenhamos, tesão é ótimo, mas tesão valorizado é ainda melhor, né?</p>
-                                <p class="text-rose-gold italic pt-6 border-t border-sand/50 text-center">Fico muito feliz que você tenha chegado até aqui! Se tudo o que escrevi faz sentido pra você, espero te encontrar em breve. Vai ser um prazer compartilhar minha companhia com você! ❤️</p>
+                        <div id="historia" class="accordion-content">
+                            <div class="px-8 pb-8">
+                                <div class="prose prose-lg max-w-none text-mahogany/80 space-y-4 font-light">
+                                    <p>Há algo de intenso em mim desde sempre. Quando criança, já sabia amadurecer rápido demais, sair de casa cedo e acumular bagagem. Moldei-me como me relaciono — sempre senti que não me encaixava com pessoas da minha geração.</p>
+                                    <p>Enquanto a maioria ainda descobria o mundo, eu buscava algo mais profundo, mais intenso na vida e nos relacionamentos. Sempre fui movida pelo novo, pelo diferente... Adoro estar com quem me ensina, que desperta minha curiosidade.</p>
+                                    <p>Foi aí que percebi: isso estava diretamente ligado ao meu prazer. Porque pra mim, tesão começa muito antes de qualquer toque. Não é só química, é conexão. É aquele momento em que a conversa envolve tanto que a mente e o corpo já estão entregues.</p>
+                                    <p>Busquei experiências de verdade que, na maioria das vezes, acabavam em frustração. As relações hoje são cada vez mais banais. Foi então que uma amiga me apresentou a este universo, e quando entrei, simplesmente adorei.</p>
+                                    <p>Finalmente havia encontrado algo que fazia sentido: vivi momentos incríveis, fiz amigos, me apaixonei, aprendi sobre negócios, conheci lugares e tive encontros que foram muito além do óbvio. Mas a vida tem dessas — entre tantas experiências boas, também veio uma decepção.</p>
+                                    <p>No final de 2024, me vi diante de uma escolha: poderia simplesmente parar por ali ou voltar para o convencional... mas esse mundo ainda me encanta. E sendo sincera, sempre gostei do prazer de ser cuidada — não só no sentido sexual, mas também financeiramente.</p>
+                                    <p>Foi aí que conheci a explorar novos caminhos e decidi estudar mais sobre o universo das acompanhantes. Desde o início, sabia que não queria seguir o caminho tradicional. O dinheiro nesta profissão tem seus encantos, claro, mas gosto de pensar que sou paga para proporcionar uma experiência única, para entregar o melhor momento.</p>
+                                    <p>Sem a burocracia e tudo que vem junto com uma relação "convencional". Depois de muita pesquisa, leituras, conversas e reflexões, decidi criar meu próprio estilo de atendimento. Algo único, que me permitisse viver essa troca, me envolver de verdade e ser valorizada por isso.</p>
+                                    <p>E assim, uni tudo que me faz bem: prazer, conexão, experiências e... dinheiro! Porque convenhamos, tesão é ótimo, mas tesão valorizado é ainda melhor, né?</p>
+                                    <div class="mt-8 p-6 bg-rose-gold/10 rounded-xl text-center">
+                                        <p class="text-rose-gold text-lg italic">Fico muito feliz que você tenha chegado até aqui! Se tudo o que escrevi faz sentido pra você, espero te encontrar em breve. Vai ser um prazer compartilhar minha companhia com você! ❤️</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -536,6 +699,7 @@
         </div>
     </section>
 
+    <!-- Contact Section - Corrigida -->
     <section id="contato" class="py-24 bg-ebony text-ivory relative overflow-hidden">
         <div class="absolute inset-0">
             <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-rose-gold/5 to-transparent animate-pulse-slow"></div>
@@ -545,24 +709,40 @@
             <div class="max-w-3xl mx-auto reveal">
                 <h2 class="font-bodoni text-5xl md:text-6xl font-light mb-8 animate-text-reveal">Pronta para nosso encontro?</h2>
                 <p class="text-xl font-light mb-12 opacity-80 animate-slide-up">Entre em contato e vamos criar momentos únicos juntos</p>
+                
+                <!-- Info de contato -->
+                <div class="mb-12 space-y-4">
+                    <p class="text-lg font-light opacity-70">Atendimento de Segunda a Sábado</p>
+                    <p class="text-2xl font-bodoni">13h às 22h30</p>
+                </div>
+                
+                <!-- Botões de contato - IMPORTANTE: Substitua # pelos links corretos -->
                 <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                    <a href="#" target="_blank" class="group bg-green-600 text-white px-10 py-5 rounded-full hover:bg-green-700 transition-all duration-300 inline-flex items-center justify-center gap-3 magnetic cta-glow shine-effect">
+                    <a href="https://wa.me/5511999999999" target="_blank" class="group bg-green-600 text-white px-10 py-5 rounded-full hover:bg-green-700 transition-all duration-300 inline-flex items-center justify-center gap-3 magnetic cta-glow shine-effect">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                         </svg>
                         <span class="font-medium tracking-wider">WhatsApp</span>
                     </a>
-                    <a href="#" target="_blank" class="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-full hover:opacity-90 transition-all duration-300 inline-flex items-center justify-center gap-3 magnetic shine-effect">
+                    <a href="https://instagram.com/seuperfil" target="_blank" class="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-full hover:opacity-90 transition-all duration-300 inline-flex items-center justify-center gap-3 magnetic shine-effect">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
                         </svg>
                         <span class="font-medium tracking-wider">Instagram</span>
                     </a>
                 </div>
+                
+                <!-- Nota importante -->
+                <div class="mt-12 p-6 bg-ivory/10 rounded-xl max-w-xl mx-auto">
+                    <p class="text-sm opacity-70 font-light">
+                        Ao entrar em contato, por favor se apresente com seu nome, idade e o que busca em nosso encontro. Mensagens respeitosas têm prioridade.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="bg-ebony border-t border-ivory/10 py-10">
         <div class="container mx-auto px-4 text-center text-ivory/60">
             <p class="font-bodoni text-xl mb-2">Gabi Rocha • São Paulo</p>
@@ -570,19 +750,21 @@
         </div>
     </footer>
 
+    <!-- Floating Buttons Mobile -->
     <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-40 lg:hidden">
-        <a href="#" target="_blank" class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-transform magnetic animate-glow">
+        <a href="https://wa.me/5511999999999" target="_blank" class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-transform magnetic animate-glow">
             <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
             </svg>
         </a>
-        <a href="#" target="_blank" class="bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-transform magnetic">
+        <a href="https://instagram.com/seuperfil" target="_blank" class="bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-transform magnetic">
             <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
             </svg>
         </a>
     </div>
 
+    <!-- Side Navigation Dots Desktop -->
     <div class="fixed top-1/2 right-0 transform -translate-y-1/2 z-30 hidden lg:block">
         <div class="flex flex-col gap-3 bg-ivory/10 backdrop-blur-xl p-3 rounded-l-2xl shadow-2xl side-nav-dots">
             <a href="#inicio" class="w-2 h-2 bg-copper rounded-full hover:w-8 transition-all duration-300"></a>
@@ -594,20 +776,22 @@
     </div>
 
     <script>
-        // JavaScript inline temporário para testes
+        // Toggle Menu Mobile
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
 
+        // Toggle Accordion com animação suave
         function toggleAccordion(id) {
             const content = document.getElementById(id);
             const icon = document.getElementById(id + '-icon');
             const allContents = document.querySelectorAll('.accordion-content');
             const allIcons = document.querySelectorAll('[id$="-icon"]');
             
+            // Fecha outros accordions
             allContents.forEach(el => {
-                if (el.id !== id) {
+                if (el.id !== id && el.classList.contains('active')) {
                     el.classList.remove('active');
                 }
             });
@@ -618,6 +802,7 @@
                 }
             });
             
+            // Toggle do accordion atual
             if (content.classList.contains('active')) {
                 content.classList.remove('active');
                 icon.classList.remove('rotate-180');
@@ -627,10 +812,193 @@
             }
         }
 
-        // Carregar o script.js externo
-        const script = document.createElement('script');
-        script.src = 'script.js';
-        document.body.appendChild(script);
+        // Scroll Effects
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const scrolled = window.scrollY > 100;
+            
+            if (scrolled) {
+                navbar.classList.add('shadow-2xl', 'py-3');
+                navbar.classList.remove('py-5');
+            } else {
+                navbar.classList.remove('shadow-2xl', 'py-3');
+                navbar.classList.add('py-5');
+            }
+
+            updateActiveNavLink();
+        });
+
+        // Update Active Navigation Link
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sideNav = document.querySelectorAll('.side-nav-dots a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-copper');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-copper');
+                }
+            });
+            
+            sideNav.forEach((link) => {
+                link.classList.remove('w-8', 'bg-copper');
+                link.classList.add('w-2', 'bg-copper/50');
+                
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.remove('w-2', 'bg-copper/50');
+                    link.classList.add('w-8', 'bg-copper');
+                }
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // DOM Ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Observe reveal elements
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu
+                        if (window.innerWidth < 1024) {
+                            const menu = document.getElementById('mobile-menu');
+                            menu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+            
+            // Magnetic effect
+            const magneticElements = document.querySelectorAll('.magnetic');
+            magneticElements.forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    el.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.05)`;
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = 'translate(0, 0) scale(1)';
+                });
+            });
+            
+            // Premium cards mouse effect
+            const premiumCards = document.querySelectorAll('.premium-card');
+            premiumCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    card.style.setProperty('--mouse-x', `${x}%`);
+                    card.style.setProperty('--mouse-y', `${y}%`);
+                });
+            });
+            
+            // Nav links underline effect
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                const span = document.createElement('span');
+                span.className = 'absolute bottom-0 left-0 w-0 h-0.5 bg-copper transition-all duration-300';
+                link.appendChild(span);
+                link.classList.add('relative', 'pb-1');
+                
+                link.addEventListener('mouseenter', () => {
+                    span.style.width = '100%';
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    if (!link.classList.contains('text-copper')) {
+                        span.style.width = '0';
+                    }
+                });
+            });
+            
+            // Hide/show floating buttons on scroll
+            let lastScrollTop = 0;
+            const floatingButtons = document.querySelector('.fixed.bottom-8.right-8');
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > lastScrollTop && scrollTop > 200) {
+                    if (floatingButtons) floatingButtons.style.transform = 'translateY(150%)';
+                } else {
+                    if (floatingButtons) floatingButtons.style.transform = 'translateY(0)';
+                }
+                
+                lastScrollTop = scrollTop;
+            }, { passive: true });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#navbar') && !e.target.closest('#mobile-menu')) {
+                const menu = document.getElementById('mobile-menu');
+                if (menu && !menu.classList.contains('hidden')) {
+                    menu.classList.add('hidden');
+                }
+            }
+        });
+
+        // Prevent animation on window resize
+        (function() {
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                document.body.classList.add('resize-animation-stopper');
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    document.body.classList.remove('resize-animation-stopper');
+                }, 400);
+            });
+            
+            const style = document.createElement('style');
+            style.textContent = '.resize-animation-stopper * { animation: none !important; transition: none !important; }';
+            document.head.appendChild(style);
+        })();
+
+        // Console branding
+        console.log('%cGabi Rocha - São Paulo', 'color: #B87333; font-size: 20px; font-weight: bold;');
+        console.log('%cSite desenvolvido com 💖', 'color: #E8B4B8; font-size: 14px;');
     </script>
 </body>
 </html>

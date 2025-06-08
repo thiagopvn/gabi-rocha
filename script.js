@@ -1,16 +1,19 @@
+// Toggle Menu Mobile
 function toggleMenu() {
     const menu = document.getElementById('mobile-menu');
     menu.classList.toggle('hidden');
 }
 
+// Toggle Accordion com animação suave
 function toggleAccordion(id) {
     const content = document.getElementById(id);
     const icon = document.getElementById(id + '-icon');
     const allContents = document.querySelectorAll('.accordion-content');
     const allIcons = document.querySelectorAll('[id$="-icon"]');
     
+    // Fecha outros accordions
     allContents.forEach(el => {
-        if (el.id !== id) {
+        if (el.id !== id && el.classList.contains('active')) {
             el.classList.remove('active');
         }
     });
@@ -21,6 +24,7 @@ function toggleAccordion(id) {
         }
     });
     
+    // Toggle do accordion atual
     if (content.classList.contains('active')) {
         content.classList.remove('active');
         icon.classList.remove('rotate-180');
@@ -30,6 +34,7 @@ function toggleAccordion(id) {
     }
 }
 
+// Scroll Effects
 window.addEventListener('scroll', function() {
     const navbar = document.getElementById('navbar');
     const scrolled = window.scrollY > 100;
@@ -42,16 +47,18 @@ window.addEventListener('scroll', function() {
         navbar.classList.add('py-5');
     }
 
+    // Parallax effect
     const parallaxElements = document.querySelectorAll('.parallax');
     parallaxElements.forEach(el => {
         const speed = el.dataset.speed || 0.5;
         const yPos = -(window.scrollY * speed);
         el.style.transform = `translateY(${yPos}px)`;
     });
-    
+
     updateActiveNavLink();
 });
 
+// Update Active Navigation Link
 function updateActiveNavLink() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -74,18 +81,18 @@ function updateActiveNavLink() {
         }
     });
     
-    sideNav.forEach((link, index) => {
+    sideNav.forEach((link) => {
         link.classList.remove('w-8', 'bg-copper');
         link.classList.add('w-2', 'bg-copper/50');
         
-        const href = link.getAttribute('href');
-        if (href === `#${current}`) {
+        if (link.getAttribute('href') === `#${current}`) {
             link.classList.remove('w-2', 'bg-copper/50');
             link.classList.add('w-8', 'bg-copper');
         }
     });
 }
 
+// Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -100,11 +107,37 @@ const observer = new IntersectionObserver(function(entries) {
     });
 }, observerOptions);
 
+// Image lazy loading observer
+const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src || img.src;
+            img.onload = () => {
+                img.classList.remove('image-loading');
+                img.classList.add('fade-in');
+            };
+            imageObserver.unobserve(img);
+        }
+    });
+}, { threshold: 0.1 });
+
+// DOM Ready
 document.addEventListener('DOMContentLoaded', function() {
+    // Observe reveal elements
     document.querySelectorAll('.reveal').forEach(el => {
         observer.observe(el);
     });
 
+    // Observe images for lazy loading
+    document.querySelectorAll('img').forEach(img => {
+        if (!img.classList.contains('image-loading')) {
+            img.style.opacity = '0';
+        }
+        imageObserver.observe(img);
+    });
+
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -118,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     behavior: 'smooth'
                 });
                 
+                // Close mobile menu
                 if (window.innerWidth < 1024) {
                     const menu = document.getElementById('mobile-menu');
                     menu.classList.add('hidden');
@@ -126,6 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Magnetic effect
     const magneticElements = document.querySelectorAll('.magnetic');
     magneticElements.forEach(el => {
         el.addEventListener('mousemove', (e) => {
@@ -140,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Premium cards mouse effect
     const premiumCards = document.querySelectorAll('.premium-card');
     premiumCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -151,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Nav links underline effect
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         const span = document.createElement('span');
@@ -169,21 +206,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    const images = document.querySelectorAll('img');
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-                imageObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    images.forEach(img => {
-        img.style.opacity = '0';
-        imageObserver.observe(img);
+    // Gallery items stagger animation
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    galleryItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+        item.classList.add('animate-scale-in');
     });
     
+    // Hide/show floating buttons on scroll
     let lastScrollTop = 0;
     const floatingButtons = document.querySelector('.fixed.bottom-8.right-8');
     
@@ -191,78 +221,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
         if (scrollTop > lastScrollTop && scrollTop > 200) {
-            if (floatingButtons) floatingButtons.style.transform = 'translateY(150%)';
+            if (floatingButtons) {
+                floatingButtons.style.transform = 'translateY(150%)';
+                floatingButtons.style.transition = 'transform 0.3s ease-in-out';
+            }
         } else {
-            if (floatingButtons) floatingButtons.style.transform = 'translateY(0)';
+            if (floatingButtons) {
+                floatingButtons.style.transform = 'translateY(0)';
+            }
         }
         
-        lastScrollTop = scrollTop;
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }, { passive: true });
     
-    const accordionButtons = document.querySelectorAll('[onclick^="toggleAccordion"]');
-    accordionButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const content = this.nextElementSibling;
-            const maxHeight = content.scrollHeight + 32;
-            
-            if (content.classList.contains('active')) {
-                content.style.maxHeight = maxHeight + 'px';
-                setTimeout(() => {
-                    content.style.maxHeight = null;
-                }, 10);
-            } else {
-                content.style.maxHeight = maxHeight + 'px';
-            }
-        });
-    });
-    
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    const gallery = document.querySelector('.grid');
-    if (gallery) {
-        gallery.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-        
-        gallery.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
-    }
-    
-    function handleSwipe() {
-        if (touchEndX < touchStartX - 50) {
-            console.log('Swiped left');
-        }
-        if (touchEndX > touchStartX + 50) {
-            console.log('Swiped right');
-        }
-    }
-    
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    galleryItems.forEach((item, index) => {
-        item.style.animationDelay = `${index * 0.1}s`;
-        item.classList.add('animate-scale-in');
-    });
-    
-    if ('IntersectionObserver' in window) {
-        const counters = document.querySelectorAll('[data-counter]');
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = parseInt(entry.target.getAttribute('data-counter'));
-                    animateCounter(entry.target, target);
-                    counterObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        counters.forEach(counter => {
-            counterObserver.observe(counter);
-        });
-    }
-    
+    // Counter animation
     function animateCounter(element, target) {
         let current = 0;
         const increment = target / 50;
@@ -276,8 +248,86 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 30);
     }
+    
+    // Observe counters
+    const counters = document.querySelectorAll('[data-counter]');
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = parseInt(entry.target.getAttribute('data-counter'));
+                animateCounter(entry.target, target);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => {
+        counterObserver.observe(counter);
+    });
+    
+    // Touch swipe for gallery mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const gallery = document.querySelector('.gallery-grid');
+    if (gallery) {
+        gallery.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        gallery.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+    }
+    
+    function handleSwipe() {
+        if (touchEndX < touchStartX - 50) {
+            // Swiped left
+            console.log('Swiped left');
+        }
+        if (touchEndX > touchStartX + 50) {
+            // Swiped right
+            console.log('Swiped right');
+        }
+    }
+    
+    // Form validation for contact (if added in future)
+    function validateForm(form) {
+        const inputs = form.querySelectorAll('input[required], textarea[required]');
+        let valid = true;
+        
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                input.classList.add('border-red-500');
+                valid = false;
+            } else {
+                input.classList.remove('border-red-500');
+            }
+        });
+        
+        return valid;
+    }
+    
+    // Performance optimization: Debounce scroll events
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Apply debounce to scroll-heavy functions
+    const debouncedUpdateNav = debounce(updateActiveNavLink, 100);
+    window.addEventListener('scroll', debouncedUpdateNav, { passive: true });
 });
 
+// Close mobile menu when clicking outside
 document.addEventListener('click', function(e) {
     if (!e.target.closest('#navbar') && !e.target.closest('#mobile-menu')) {
         const menu = document.getElementById('mobile-menu');
@@ -287,6 +337,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// Prevent animation on window resize
 (function() {
     let resizeTimer;
     window.addEventListener('resize', function() {
@@ -302,5 +353,24 @@ document.addEventListener('click', function(e) {
     document.head.appendChild(style);
 })();
 
+// Console branding
 console.log('%cGabi Rocha - São Paulo', 'color: #B87333; font-size: 20px; font-weight: bold;');
 console.log('%cSite desenvolvido com 💖', 'color: #E8B4B8; font-size: 14px;');
+console.log('%cExclusive • Elegante • Sofisticado', 'color: #6F4E37; font-size: 12px; font-style: italic;');
+
+// Service Worker Registration (for PWA support in future)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        // Uncomment when service worker is ready
+        // navigator.serviceWorker.register('/sw.js')
+        //     .then(registration => console.log('SW registered'))
+        //     .catch(err => console.log('SW registration failed'));
+    });
+}
+
+// Export functions for external use if needed
+window.siteUtils = {
+    toggleMenu,
+    toggleAccordion,
+    updateActiveNavLink
+};
