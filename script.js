@@ -55,7 +55,7 @@ window.addEventListener('scroll', function() {
 function updateActiveNavLink() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
-    const sideNav = document.querySelectorAll('.fixed.top-1\\/2 a');
+    const sideNav = document.querySelectorAll('.side-nav-dots a');
     
     let current = '';
     
@@ -191,9 +191,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
         if (scrollTop > lastScrollTop && scrollTop > 200) {
-            floatingButtons.style.transform = 'translateY(150%)';
+            if (floatingButtons) floatingButtons.style.transform = 'translateY(150%)';
         } else {
-            floatingButtons.style.transform = 'translateY(0)';
+            if (floatingButtons) floatingButtons.style.transform = 'translateY(0)';
         }
         
         lastScrollTop = scrollTop;
@@ -216,19 +216,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    const style = document.createElement('style');
-    style.textContent = `
-        .animation-delay-1000 { animation-delay: 1s; }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-3000 { animation-delay: 3s; }
-        .animation-delay-4000 { animation-delay: 4s; }
-    `;
-    document.head.appendChild(style);
-    
     let touchStartX = 0;
     let touchEndX = 0;
     
-    const gallery = document.querySelector('.photo-grid');
+    const gallery = document.querySelector('.grid');
     if (gallery) {
         gallery.addEventListener('touchstart', e => {
             touchStartX = e.changedTouches[0].screenX;
@@ -290,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('click', function(e) {
     if (!e.target.closest('#navbar') && !e.target.closest('#mobile-menu')) {
         const menu = document.getElementById('mobile-menu');
-        if (!menu.classList.contains('hidden')) {
+        if (menu && !menu.classList.contains('hidden')) {
             menu.classList.add('hidden');
         }
     }

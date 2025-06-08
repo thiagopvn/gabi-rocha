@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabi Rocha - Acompanhante de Luxo | São Paulo</title>
     <meta name="description" content="Gabi Rocha - Acompanhante de luxo em São Paulo. Encontros exclusivos entre Consolação e Jardins.">
+    
+    <!-- IMPORTANTE: Substitua os links # pelos links corretos -->
+    <!-- WhatsApp: https://wa.me/5511SEUNUMERO -->
+    <!-- Instagram: https://instagram.com/SEUUSER -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
     <script>
@@ -87,6 +92,7 @@
             animation: gradient-shift 3s ease infinite;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         
@@ -208,6 +214,19 @@
         }
         .cta-glow:hover::before { opacity: 1; }
         .cta-glow:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(184, 115, 51, 0.3); }
+        
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(111,78,55,0.7) 0%, rgba(44,24,16,0.8) 50%, rgba(111,78,55,0.7) 100%);
+        }
+        
+        /* Corrigindo seletores CSS */
+        .side-nav-dots a { transition: all 0.3s ease; }
+        
+        /* Garantindo que as animações funcionem */
+        .animation-delay-1000 { animation-delay: 1s; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-3000 { animation-delay: 3s; }
+        .animation-delay-4000 { animation-delay: 4s; }
     </style>
 </head>
 <body class="bg-ivory text-ebony font-poppins overflow-x-hidden">
@@ -245,7 +264,13 @@
         </div>
     </nav>
 
-    <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden hero-bg">
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Imagem de fundo -->
+        <div class="absolute inset-0 z-0">
+            <img src="images/hero.jpg" alt="Gabi Rocha" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        
         <div class="morph-shape absolute top-20 right-20 w-96 h-96 bg-rose-gold/10 blur-3xl"></div>
         <div class="morph-shape absolute bottom-20 left-20 w-96 h-96 bg-copper/10 blur-3xl animation-delay-4000"></div>
         
@@ -286,37 +311,54 @@
                 </div>
             </div>
             
-            <!-- Galeria com placeholders estilizados -->
+            <!-- Galeria com imagens locais -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
-                <div class="gallery-item aspect-[3/4] photo-placeholder rounded-lg col-span-1 row-span-2">
+                <div class="gallery-item aspect-[3/4] rounded-lg col-span-1 row-span-2">
+                    <img src="images/gallery/foto1.jpg" alt="Gabi Rocha - Foto 1" class="w-full h-full object-cover rounded-lg">
                     <div class="photo-overlay">
                         <span class="text-ivory text-sm tracking-wider font-light">EXCLUSIVE</span>
                     </div>
                 </div>
-                <div class="gallery-item aspect-[4/3] photo-placeholder rounded-lg"></div>
-                <div class="gallery-item aspect-[4/3] photo-placeholder rounded-lg"></div>
-                <div class="gallery-item aspect-[16/9] photo-placeholder rounded-lg col-span-1 md:col-span-2"></div>
-                <div class="gallery-item aspect-square photo-placeholder rounded-lg"></div>
-                <div class="gallery-item aspect-[3/4] photo-placeholder rounded-lg row-span-2">
+                <div class="gallery-item aspect-[4/3] rounded-lg">
+                    <img src="images/gallery/foto2.jpg" alt="Gabi Rocha - Foto 2" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <div class="gallery-item aspect-[4/3] rounded-lg">
+                    <img src="images/gallery/foto3.jpg" alt="Gabi Rocha - Foto 3" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <div class="gallery-item aspect-[16/9] rounded-lg col-span-1 md:col-span-2">
+                    <img src="images/gallery/foto4.jpg" alt="Gabi Rocha - Foto 4" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <div class="gallery-item aspect-square rounded-lg">
+                    <img src="images/gallery/foto5.jpg" alt="Gabi Rocha - Foto 5" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <div class="gallery-item aspect-[3/4] rounded-lg row-span-2">
+                    <img src="images/gallery/foto6.jpg" alt="Gabi Rocha - Foto 6" class="w-full h-full object-cover rounded-lg">
                     <div class="photo-overlay">
                         <span class="text-ivory text-sm tracking-wider font-light">ELEGANCE</span>
                     </div>
                 </div>
-                <div class="gallery-item aspect-square photo-placeholder rounded-lg"></div>
-                <div class="gallery-item aspect-[4/3] photo-placeholder rounded-lg"></div>
-                <div class="gallery-item aspect-[3/4] photo-placeholder rounded-lg col-span-1 md:col-span-2 row-span-2">
+                <div class="gallery-item aspect-square rounded-lg">
+                    <img src="images/gallery/foto7.jpg" alt="Gabi Rocha - Foto 7" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <div class="gallery-item aspect-[4/3] rounded-lg">
+                    <img src="images/gallery/foto8.jpg" alt="Gabi Rocha - Foto 8" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <div class="gallery-item aspect-[3/4] rounded-lg col-span-1 md:col-span-2 row-span-2">
+                    <img src="images/gallery/foto9.jpg" alt="Gabi Rocha - Foto 9" class="w-full h-full object-cover rounded-lg">
                     <div class="photo-overlay">
                         <span class="text-ivory text-sm tracking-wider font-light">SOPHISTICATION</span>
                     </div>
                 </div>
-                <div class="gallery-item aspect-square photo-placeholder rounded-lg"></div>
-                <div class="gallery-item aspect-[4/3] photo-placeholder rounded-lg"></div>
-                <div class="gallery-item aspect-square photo-placeholder rounded-lg"></div>
+                <div class="gallery-item aspect-square rounded-lg">
+                    <img src="images/gallery/foto10.jpg" alt="Gabi Rocha - Foto 10" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <div class="gallery-item aspect-[4/3] rounded-lg">
+                    <img src="images/gallery/foto11.jpg" alt="Gabi Rocha - Foto 11" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <div class="gallery-item aspect-square rounded-lg">
+                    <img src="images/gallery/foto12.jpg" alt="Gabi Rocha - Foto 12" class="w-full h-full object-cover rounded-lg">
+                </div>
             </div>
-            
-            <p class="text-center mt-8 text-mahogany/60 text-sm">
-                *As fotos devem ser colocadas na pasta images/gallery/ (foto1.jpg até foto12.jpg)
-            </p>
         </div>
     </section>
 
@@ -365,8 +407,8 @@
                     <div class="reveal order-1 lg:order-2">
                         <div class="relative">
                             <div class="absolute -inset-4 bg-gradient-to-r from-rose-gold/20 to-copper/20 rounded-2xl blur-2xl"></div>
-                            <div class="relative w-full aspect-[3/4] photo-placeholder rounded-2xl shadow-2xl luxury-border">
-                                <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white/50 text-xl">PROFILE</span>
+                            <div class="relative w-full aspect-[3/4] rounded-2xl shadow-2xl luxury-border overflow-hidden">
+                                <img src="images/profile.jpg" alt="Gabi Rocha - Perfil" class="w-full h-full object-cover">
                             </div>
                         </div>
                     </div>
@@ -504,13 +546,13 @@
                 <h2 class="font-bodoni text-5xl md:text-6xl font-light mb-8 animate-text-reveal">Pronta para nosso encontro?</h2>
                 <p class="text-xl font-light mb-12 opacity-80 animate-slide-up">Entre em contato e vamos criar momentos únicos juntos</p>
                 <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                    <a href="https://wa.me/5511999999999" target="_blank" class="group bg-green-600 text-white px-10 py-5 rounded-full hover:bg-green-700 transition-all duration-300 inline-flex items-center justify-center gap-3 magnetic cta-glow shine-effect">
+                    <a href="#" target="_blank" class="group bg-green-600 text-white px-10 py-5 rounded-full hover:bg-green-700 transition-all duration-300 inline-flex items-center justify-center gap-3 magnetic cta-glow shine-effect">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                         </svg>
                         <span class="font-medium tracking-wider">WhatsApp</span>
                     </a>
-                    <a href="https://instagram.com/gabirocha" target="_blank" class="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-full hover:opacity-90 transition-all duration-300 inline-flex items-center justify-center gap-3 magnetic shine-effect">
+                    <a href="#" target="_blank" class="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-full hover:opacity-90 transition-all duration-300 inline-flex items-center justify-center gap-3 magnetic shine-effect">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
                         </svg>
@@ -529,12 +571,12 @@
     </footer>
 
     <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-40 lg:hidden">
-        <a href="https://wa.me/5511999999999" target="_blank" class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-transform magnetic animate-glow">
+        <a href="#" target="_blank" class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-transform magnetic animate-glow">
             <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
             </svg>
         </a>
-        <a href="https://instagram.com/gabirocha" target="_blank" class="bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-transform magnetic">
+        <a href="#" target="_blank" class="bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-transform magnetic">
             <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
             </svg>
@@ -542,7 +584,7 @@
     </div>
 
     <div class="fixed top-1/2 right-0 transform -translate-y-1/2 z-30 hidden lg:block">
-        <div class="flex flex-col gap-3 bg-ivory/10 backdrop-blur-xl p-3 rounded-l-2xl shadow-2xl">
+        <div class="flex flex-col gap-3 bg-ivory/10 backdrop-blur-xl p-3 rounded-l-2xl shadow-2xl side-nav-dots">
             <a href="#inicio" class="w-2 h-2 bg-copper rounded-full hover:w-8 transition-all duration-300"></a>
             <a href="#galeria" class="w-2 h-2 bg-copper/50 rounded-full hover:w-8 hover:bg-copper transition-all duration-300"></a>
             <a href="#encontros" class="w-2 h-2 bg-copper/50 rounded-full hover:w-8 hover:bg-copper transition-all duration-300"></a>
@@ -551,6 +593,44 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // JavaScript inline temporário para testes
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(id + '-icon');
+            const allContents = document.querySelectorAll('.accordion-content');
+            const allIcons = document.querySelectorAll('[id$="-icon"]');
+            
+            allContents.forEach(el => {
+                if (el.id !== id) {
+                    el.classList.remove('active');
+                }
+            });
+            
+            allIcons.forEach(el => {
+                if (el.id !== id + '-icon') {
+                    el.classList.remove('rotate-180');
+                }
+            });
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotate-180');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        // Carregar o script.js externo
+        const script = document.createElement('script');
+        script.src = 'script.js';
+        document.body.appendChild(script);
+    </script>
 </body>
 </html>
