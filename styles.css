@@ -83,7 +83,7 @@ nav h1 {
 
 .hero-text {
     position: absolute;
-    top: 50%;
+    top: 75%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -117,6 +117,10 @@ section {
     padding: 100px 0;
 }
 
+#contato {
+    padding: 50px 0;
+}
+
 .container {
     max-width: 1000px;
     margin: 0 auto;
@@ -129,6 +133,9 @@ h2 {
     letter-spacing: 3px;
     margin-bottom: 50px;
     text-align: center;
+}
+#contato h2 {
+    margin-bottom: 30px;
 }
 
 #encontros {
