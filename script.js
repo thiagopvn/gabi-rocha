@@ -40,3 +40,14 @@ window.addEventListener('scroll', function() {
         nav.style.background = 'rgba(0,0,0,0.9)';
     }
 });
+function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('active');
+}
+
+// Fechar menu ao clicar em um link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('active');
+    });
+});
