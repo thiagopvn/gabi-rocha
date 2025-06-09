@@ -453,7 +453,6 @@ footer p {
     width: 30px;
     height: 30px;
 }
-
 @media (max-width: 768px) {
     nav h1 {
         font-size: 20px;
@@ -486,7 +485,11 @@ footer p {
     }
     
     .hero-text {
-        top: 50%;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: auto;
     }
     
     .hero-text h2 {
