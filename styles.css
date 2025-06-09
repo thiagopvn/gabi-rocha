@@ -20,6 +20,7 @@ nav {
     z-index: 1000;
     padding: 20px 0;
     border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.3s;
 }
 
 .nav-container {
@@ -52,6 +53,15 @@ nav h1 {
 
 .nav-links a:hover {
     opacity: 0.6;
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 #hero {
@@ -134,12 +144,25 @@ h2 {
     margin-bottom: 50px;
     text-align: center;
 }
+
 #contato h2 {
     margin-bottom: 30px;
 }
 
 #encontros {
     background: #0a0a0a;
+}
+
+.intro-text {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.intro-text p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.8;
+    opacity: 0.9;
 }
 
 .valores {
@@ -155,6 +178,12 @@ h2 {
     border: 1px solid rgba(255,255,255,0.2);
 }
 
+.valor-item.especial {
+    grid-column: span 3;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,215,0,0.3);
+}
+
 .tempo {
     display: block;
     font-size: 14px;
@@ -162,10 +191,135 @@ h2 {
     margin-bottom: 10px;
 }
 
+.tempo-detalhe {
+    display: block;
+    font-size: 12px;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
 .preco {
     display: block;
     font-size: 24px;
     font-weight: 300;
+}
+
+.observacao {
+    display: block;
+    font-size: 14px;
+    opacity: 0.7;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.atendimento-casais {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.atendimento-casais p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.info-box {
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.02);
+}
+
+.info-box h3 {
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.info-box p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.info-box.special {
+    grid-column: span 2;
+    background: rgba(255,215,0,0.02);
+    border-color: rgba(255,215,0,0.3);
+}
+
+#galeria {
+    background: #000;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+}
+
+.gallery-item {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+#sobre {
+    background: #0a0a0a;
+}
+
+.sobre-intro {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.sobre-intro p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.sobre-destaque {
+    text-align: center;
+    margin: 60px auto;
+    padding: 40px;
+    max-width: 700px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sobre-destaque p {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.sobre-destaque p:last-child {
+    margin-bottom: 0;
 }
 
 .accordion-container {
@@ -230,70 +384,6 @@ h2 {
     font-size: 16px;
     font-weight: 300;
     line-height: 1.8;
-}
-
-.info-section {
-    margin-bottom: 20px;
-}
-
-.info-section h4 {
-    font-size: 16px;
-    margin-bottom: 10px;
-    font-weight: 400;
-}
-
-.note {
-    color: rgba(255,255,255,0.7);
-    font-style: italic;
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.gallery-item {
-    aspect-ratio: 3/4;
-    overflow: hidden;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-
-#sobre {
-    background: #0a0a0a;
-}
-
-.sobre-intro {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.sobre-intro p {
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 1.8;
-    margin-bottom: 20px;
-}
-
-.sobre-info {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 40px;
-}
-
-.sobre-info p {
-    font-size: 16px;
 }
 
 .contato-content {
@@ -365,236 +455,11 @@ footer p {
 }
 
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
+    nav h1 {
+        font-size: 20px;
+        letter-spacing: 2px;
     }
     
-    .hero-text h2 {
-        font-size: 32px;
-    }
-    
-    .valores {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .sobre-info {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    h2 {
-        font-size: 28px;
-    }
-}
-#encontros {
-    background: #0a0a0a;
-}
-
-.intro-text {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.intro-text p {
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 1.8;
-    opacity: 0.9;
-}
-
-.valores {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-bottom: 60px;
-}
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-}
-
-.gallery-item {
-    aspect-ratio: 1/1;
-    overflow: hidden;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-@media (max-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-.valor-item.especial {
-    grid-column: span 3;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,215,0,0.3);
-}
-
-.tempo-detalhe {
-    display: block;
-    font-size: 12px;
-    opacity: 0.7;
-    margin-bottom: 10px;
-}
-
-.observacao {
-    display: block;
-    font-size: 14px;
-    opacity: 0.7;
-    margin-top: 10px;
-    font-style: italic;
-}
-
-.atendimento-casais {
-    text-align: center;
-    margin-bottom: 60px;
-    padding: 20px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.atendimento-casais p {
-    font-size: 16px;
-    margin: 0;
-}
-
-@media (max-width: 768px) {
-    .valor-item.especial {
-        grid-column: span 1;
-    }
-}
-.sobre-destaque {
-    text-align: center;
-    margin: 60px auto;
-    padding: 40px;
-    max-width: 700px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.sobre-destaque p {
-    font-size: 17px;
-    font-weight: 300;
-    line-height: 1.8;
-    margin-bottom: 20px;
-    font-style: italic;
-    opacity: 0.9;
-}
-
-.sobre-destaque p:last-child {
-    margin-bottom: 0;
-}
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-.info-box {
-    padding: 30px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.02);
-}
-
-.info-box h3 {
-    font-size: 18px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    margin-bottom: 20px;
-}
-
-.info-box p {
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 10px;
-    opacity: 0.9;
-}
-
-.info-box.special {
-    grid-column: span 2;
-    background: rgba(255,215,0,0.02);
-    border-color: rgba(255,215,0,0.3);
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .info-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .info-box.special {
-        grid-column: span 1;
-    }
-}
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-.info-box {
-    padding: 30px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.02);
-}
-
-.info-box h3 {
-    font-size: 18px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    margin-bottom: 20px;
-}
-
-.info-box p {
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 10px;
-    opacity: 0.9;
-}
-
-.info-box.special {
-    grid-column: span 2;
-    background: rgba(255,215,0,0.02);
-    border-color: rgba(255,215,0,0.3);
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .info-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .info-box.special {
-        grid-column: span 1;
-    }
-}
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
     .nav-toggle {
         display: block;
     }
@@ -614,32 +479,26 @@ footer p {
     .nav-links.active {
         display: flex;
     }
-}
-@media (max-width: 768px) {
+    
+    #hero {
+        height: 100vh;
+        height: 100dvh;
+    }
+    
+    .hero-text {
+        top: 50%;
+    }
+    
+    .hero-text h2 {
+        font-size: 32px;
+    }
+    
     section {
-        padding: 60px 0; /* Reduzir de 100px */
+        padding: 60px 0;
     }
     
     .container {
-        padding: 0 15px; /* Reduzir padding lateral */
-    }
-    
-    .valor-item {
-        padding: 20px; /* Reduzir de 30px */
-    }
-    
-    .accordion-header {
-        padding: 15px 20px; /* Reduzir padding */
-    }
-    
-    .accordion-inner {
-        padding: 0 20px 20px; /* Reduzir padding */
-    }
-}
-@media (max-width: 768px) {
-    nav h1 {
-        font-size: 20px;
-        letter-spacing: 2px;
+        padding: 0 15px;
     }
     
     h2 {
@@ -653,8 +512,41 @@ footer p {
         font-size: 16px;
     }
     
+    .valores {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .valor-item {
+        padding: 20px;
+    }
+    
+    .valor-item.especial {
+        grid-column: span 1;
+    }
+    
     .preco {
         font-size: 20px;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-box.special {
+        grid-column: span 1;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .accordion-header {
+        padding: 15px 20px;
+    }
+    
+    .accordion-inner {
+        padding: 0 20px 20px;
     }
     
     .accordion-inner p {
@@ -665,8 +557,7 @@ footer p {
         padding: 12px 30px;
         font-size: 12px;
     }
-}
-@media (max-width: 768px) {
+    
     .whats-float {
         width: 50px;
         height: 50px;
