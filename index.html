@@ -97,54 +97,22 @@
         
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            grid-auto-rows: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
         
-        /* Alturas específicas baseadas nas proporções reais das fotos */
-        .gallery-item:nth-child(1) { grid-row: span 20; } /* foto1: 1200x1600 (3:4) */
-        .gallery-item:nth-child(2) { grid-row: span 24; } /* foto2: 1066x1600 (2:3) */
-        .gallery-item:nth-child(3) { grid-row: span 24; } /* foto3: 1066x1600 (2:3) */
-        .gallery-item:nth-child(4) { grid-row: span 20; } /* foto4: 1200x1600 (3:4) */
-        .gallery-item:nth-child(5) { grid-row: span 20; } /* foto5: 1198x1600 (3:4) */
-        .gallery-item:nth-child(6) { grid-row: span 28; } /* foto6: 900x1600 (9:16) */
-        .gallery-item:nth-child(7) { grid-row: span 24; } /* foto7: 1066x1600 (2:3) */
-        .gallery-item:nth-child(8) { grid-row: span 28; } /* foto8: 900x1600 (9:16) */
-        .gallery-item:nth-child(9) { grid-row: span 28; } /* foto9: 900x1600 (9:16) */
-        .gallery-item:nth-child(10) { grid-row: span 24; } /* foto10: 1066x1600 (2:3) */
-        .gallery-item:nth-child(11) { grid-row: span 16; grid-column: 1 / -1; } /* foto11: 1600x1441 (landscape) */
-        .gallery-item:nth-child(12) { grid-row: span 24; } /* foto12: 1066x1600 (2:3) */
+        .gallery-item {
+            aspect-ratio: 3/4;
+        }
 
         @media (max-width: 768px) {
             .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-                grid-auto-rows: 15px;
-            }
-            
-            .gallery-item:nth-child(1) { grid-row: span 15; }
-            .gallery-item:nth-child(2) { grid-row: span 18; }
-            .gallery-item:nth-child(3) { grid-row: span 18; }
-            .gallery-item:nth-child(4) { grid-row: span 15; }
-            .gallery-item:nth-child(5) { grid-row: span 15; }
-            .gallery-item:nth-child(6) { grid-row: span 21; }
-            .gallery-item:nth-child(7) { grid-row: span 18; }
-            .gallery-item:nth-child(8) { grid-row: span 21; }
-            .gallery-item:nth-child(9) { grid-row: span 21; }
-            .gallery-item:nth-child(10) { grid-row: span 18; }
-            .gallery-item:nth-child(11) { grid-row: span 12; grid-column: 1 / -1; }
-            .gallery-item:nth-child(12) { grid-row: span 18; }
-        }
-
-        @media (max-width: 480px) {
-            .gallery-grid {
                 grid-template-columns: 1fr;
-                gap: 12px;
-                grid-auto-rows: 20px;
+                gap: 16px;
+                max-width: 400px;
             }
-            
-            .gallery-item:nth-child(11) { grid-column: 1; }
         }
         
         .nav-blur { 
@@ -204,6 +172,12 @@
             background: linear-gradient(90deg, #F5E6D3 25%, #E8B4B8 50%, #F5E6D3 75%);
             background-size: 200% 100%;
             animation: shimmer 1.5s ease-in-out infinite;
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(250,247,240,0.8) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(205, 127, 50, 0.1);
         }
     </style>
 </head>
@@ -298,42 +272,6 @@
                 <div class="gallery-item hover-lift">
                     <img src="images/gallery/foto3.jpg" alt="Gabi Rocha - Sorriso genuíno" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
                 </div>
-                
-                <div class="gallery-item hover-lift">
-                    <img src="images/gallery/foto4.jpg" alt="Gabi Rocha - Elegância natural" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
-                </div>
-                
-                <div class="gallery-item hover-lift">
-                    <img src="images/gallery/foto5.jpg" alt="Gabi Rocha - Presença marcante" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
-                </div>
-                
-                <div class="gallery-item hover-lift">
-                    <img src="images/gallery/foto6.jpg" alt="Gabi Rocha - Sensualidade discreta" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
-                </div>
-                
-                <div class="gallery-item hover-lift">
-                    <img src="images/gallery/foto7.jpg" alt="Gabi Rocha - Charme natural" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
-                </div>
-                
-                <div class="gallery-item hover-lift">
-                    <img src="images/gallery/foto8.jpg" alt="Gabi Rocha - Doçura e intensidade" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
-                </div>
-                
-                <div class="gallery-item hover-lift">
-                    <img src="images/gallery/foto9.jpg" alt="Gabi Rocha - Momento íntimo" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
-                </div>
-                
-                <div class="gallery-item hover-lift">
-                    <img src="images/gallery/foto10.jpg" alt="Gabi Rocha - Beleza autêntica" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
-                </div>
-                
-                <div class="gallery-item hover-lift">
-                    <img src="images/gallery/foto11.jpg" alt="Gabi Rocha - Panorama de elegância" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
-                </div>
-                
-                <div class="gallery-item hover-lift">
-                    <img src="images/gallery/foto12.jpg" alt="Gabi Rocha - Essência feminina" class="loading-placeholder" onload="this.classList.remove('loading-placeholder')">
-                </div>
             </div>
             
             <div class="text-center mt-12 reveal">
@@ -354,55 +292,12 @@
                 <h2 class="font-playfair text-3xl md:text-5xl font-light mb-4">Nossos Encontros</h2>
                 <div class="w-20 h-px bg-bronze mx-auto mb-6"></div>
                 <p class="text-cognac/70 text-lg font-light max-w-3xl mx-auto">
-                    Cada encontro é planejado com cuidado e atenção aos detalhes. 
-                    Valorizo a qualidade do tempo que passamos juntos e a conexão genuína que criamos.
+                    Informações claras e diretas para que você possa entender como funcionam nossos encontros.
                 </p>
             </div>
             
-            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
-                <div class="reveal order-2 lg:order-1">
-                    <p class="text-cognac mb-6 leading-relaxed text-lg font-light">
-                        Recebo em meu apartamento aconchegante entre a Consolação e os Jardins, um espaço pensado para o nosso conforto e privacidade. Também me desloco para hotéis de qualidade e apartamentos com portaria nas regiões nobres da cidade.
-                    </p>
-                    <p class="text-cognac mb-8 leading-relaxed text-lg font-light">
-                        Prefiro encontros agendados com antecedência, pois assim posso me preparar adequadamente e estar completamente disponível para você. Acredito que os melhores momentos nascem do cuidado e da expectativa compartilhada.
-                    </p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl hover-lift">
-                            <div class="w-12 h-12 bg-blush/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                            </div>
-                            <h3 class="font-playfair text-lg mb-1">Disponibilidade</h3>
-                            <p class="text-sm text-cognac/70">13h às 22h30</p>
-                        </div>
-                        
-                        <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl hover-lift">
-                            <div class="w-12 h-12 bg-blush/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                </svg>
-                            </div>
-                            <h3 class="font-playfair text-lg mb-1">Agendamento</h3>
-                            <p class="text-sm text-cognac/70">Sempre com antecedência</p>
-                        </div>
-                        
-                        <div class="text-center p-6 bg-white/50 backdrop-blur-sm rounded-xl hover-lift">
-                            <div class="w-12 h-12 bg-blush/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                </svg>
-                            </div>
-                            <h3 class="font-playfair text-lg mb-1">Localizações</h3>
-                            <p class="text-sm text-cognac/70">Consolação • Jardins</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="reveal order-1 lg:order-2">
+            <div class="grid lg:grid-cols-2 gap-12 items-start mb-16">
+                <div class="reveal">
                     <div class="relative max-w-md mx-auto">
                         <div class="absolute -inset-4 bg-gradient-to-r from-blush/20 to-bronze/20 rounded-3xl blur-2xl"></div>
                         <div class="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
@@ -410,124 +305,131 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="reveal space-y-8">
+                    <!-- Valores -->
+                    <div class="info-card p-6 rounded-2xl shadow-lg">
+                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso mb-4 flex items-center gap-3">
+                            <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                            </svg>
+                            Investimento
+                        </h3>
+                        <div class="grid grid-cols-1 gap-3 mb-4">
+                            <div class="flex justify-between items-center p-3 bg-champagne/50 rounded-lg">
+                                <span class="font-medium text-espresso">1 hora</span>
+                                <span class="text-xl font-playfair text-bronze">R$ 1.000</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-champagne/50 rounded-lg">
+                                <span class="font-medium text-espresso">2 horas</span>
+                                <span class="text-xl font-playfair text-bronze">R$ 1.700</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-champagne/50 rounded-lg">
+                                <span class="font-medium text-espresso">3 horas</span>
+                                <span class="text-xl font-playfair text-bronze">R$ 2.300</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Localização -->
+                    <div class="info-card p-6 rounded-2xl shadow-lg">
+                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso mb-4 flex items-center gap-3">
+                            <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            Localização
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
+                                <span>Meu apartamento fica entre a <strong>Consolação/Jardins</strong></span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
+                                <span>Encontros fora somente em algumas regiões + acréscimo de Uber</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
+                                <span>Atendo apenas em locais com <strong>portaria 24h</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agendamento -->
+                    <div class="info-card p-6 rounded-2xl shadow-lg">
+                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso mb-4 flex items-center gap-3">
+                            <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            Agendamento
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
+                                <span>Agendamentos com no mínimo <strong>1h de antecedência</strong></span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
+                                <span>Priorizo apenas <strong>um encontro por dia</strong></span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
+                                <span>Para confirmar, peço um sinal de <strong>20% do valor combinado</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="space-y-6">
-                <div class="bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden reveal">
-                    <button onclick="toggleAccordion('valores')" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-nude/30 transition-all duration-300">
-                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Investimento & Tempo</h3>
-                        <svg id="valores-icon" class="w-6 h-6 text-bronze transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+
+            <!-- Informações Importantes -->
+            <div class="reveal">
+                <div class="info-card p-8 rounded-2xl shadow-xl">
+                    <h3 class="font-playfair text-2xl md:text-3xl text-espresso mb-6 text-center flex items-center justify-center gap-3">
+                        <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                    </button>
-                    <div id="valores" class="accordion-content">
-                        <div class="px-6 pb-6">
-                            <p class="text-cognac/80 mb-6 font-light leading-relaxed">
-                                Cada momento juntos é um investimento em experiências memoráveis. Os valores refletem não apenas o tempo, mas a qualidade, o cuidado e a exclusividade de nosso encontro.
-                            </p>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div class="bg-gradient-to-br from-champagne to-nude p-4 rounded-xl text-center hover-lift">
-                                    <span class="block text-sm text-cognac/70 mb-1">1 hora</span>
-                                    <span class="block text-xl font-playfair text-espresso">R$ 900</span>
-                                </div>
-                                <div class="bg-gradient-to-br from-champagne to-nude p-4 rounded-xl text-center hover-lift">
-                                    <span class="block text-sm text-cognac/70 mb-1">2 horas</span>
-                                    <span class="block text-xl font-playfair text-espresso">R$ 1.600</span>
-                                </div>
-                                <div class="bg-gradient-to-br from-champagne to-nude p-4 rounded-xl text-center hover-lift">
-                                    <span class="block text-sm text-cognac/70 mb-1">3 horas</span>
-                                    <span class="block text-xl font-playfair text-espresso">R$ 2.400</span>
-                                </div>
-                                <div class="bg-gradient-to-br from-blush/30 to-bronze/30 p-4 rounded-xl text-center hover-lift">
-                                    <span class="block text-sm text-cognac/70 mb-1">Pernoite</span>
-                                    <span class="block text-xl font-playfair text-espresso">R$ 7.000</span>
-                                </div>
-                            </div>
-                            <p class="text-center text-cognac/60 text-sm mt-4 font-light">
-                                * Valores para atendimento em meu apartamento. Para deslocamentos, consulte condições especiais.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden reveal">
-                    <button onclick="toggleAccordion('regioes')" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-nude/30 transition-all duration-300">
-                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Onde Nos Encontramos</h3>
-                        <svg id="regioes-icon" class="w-6 h-6 text-bronze transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </button>
-                    <div id="regioes" class="accordion-content">
-                        <div class="px-6 pb-6">
-                            <p class="text-cognac/70 mb-4 font-light">
-                                Atendo com deslocamento nas regiões mais exclusivas de São Paulo, sempre priorizando a discrição e o conforto mútuo:
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="px-4 py-2 bg-nude/50 rounded-full text-sm text-espresso">Vila Olímpia</span>
-                                <span class="px-4 py-2 bg-nude/50 rounded-full text-sm text-espresso">Itaim Bibi</span>
-                                <span class="px-4 py-2 bg-nude/50 rounded-full text-sm text-espresso">Vila Mariana</span>
-                                <span class="px-4 py-2 bg-nude/50 rounded-full text-sm text-espresso">Brooklin</span>
-                                <span class="px-4 py-2 bg-nude/50 rounded-full text-sm text-espresso">Pinheiros</span>
-                                <span class="px-4 py-2 bg-nude/50 rounded-full text-sm text-espresso">Jardins</span>
-                                <span class="px-4 py-2 bg-blush/30 rounded-full text-sm text-espresso font-medium">Consolação (Meu Espaço)</span>
-                            </div>
-                            <div class="mt-4 p-4 bg-blush/10 rounded-xl">
-                                <p class="text-espresso text-sm font-light">
-                                    <span class="font-medium">Importante:</span> Para deslocamentos, solicito hotéis 4-5 estrelas ou apartamentos com portaria 24h nas regiões mencionadas.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden reveal">
-                    <button onclick="toggleAccordion('guidelines')" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-nude/30 transition-all duration-300">
-                        <h3 class="font-playfair text-2xl md:text-3xl text-espresso">Para um Encontro Perfeito</h3>
-                        <svg id="guidelines-icon" class="w-6 h-6 text-bronze transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </button>
-                    <div id="guidelines" class="accordion-content">
-                        <div class="px-6 pb-6">
-                            <p class="text-cognac/80 mb-6 font-light leading-relaxed">
-                                Alguns cuidados que tornam nosso encontro ainda mais especial e garantem que ambos vivamos uma experiência memorável:
-                            </p>
-                            <ul class="space-y-3 text-espresso">
+                        Informações Importantes
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-espresso mb-3 text-lg">O que NÃO faço:</h4>
+                            <ul class="space-y-2">
                                 <li class="flex items-start gap-3">
-                                    <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Confirmo agendamentos mediante sinal de 15% do valor total</span>
+                                    <div class="w-2 h-2 bg-blush rounded-full mt-2 flex-shrink-0"></div>
+                                    <span>Não faço anal</span>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Aceito pagamento via PIX ou dinheiro no início do encontro</span>
+                                    <div class="w-2 h-2 bg-blush rounded-full mt-2 flex-shrink-0"></div>
+                                    <span>Não atendo pessoas alcoolizadas ou drogadas</span>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Higiene impecável é fundamental para o conforto de ambos</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Não atendo pessoas sob efeito de álcool ou outras substâncias</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Atendo exclusivamente encontros individuais</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Algumas práticas não fazem parte do meu repertório</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
-                                    <span class="font-light">Discrição absoluta é garantida sempre</span>
+                                    <div class="w-2 h-2 bg-blush rounded-full mt-2 flex-shrink-0"></div>
+                                    <span>Não permito finalizar no rosto ou na boca</span>
                                 </li>
                             </ul>
-                            <div class="mt-6 p-4 bg-blush/10 rounded-xl">
-                                <p class="text-espresso text-center font-light">
-                                    <span class="font-medium">Essencial:</span> O respeito mútuo e a elegância no trato criam a base para momentos verdadeiramente especiais.
-                                </p>
-                            </div>
                         </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-espresso mb-3 text-lg">Condições especiais:</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start gap-3">
+                                    <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
+                                    <span>Oral sem preservativo e beijos só com higiene ok</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <div class="w-2 h-2 bg-bronze rounded-full mt-2 flex-shrink-0"></div>
+                                    <span>Educação, respeito e bom senso são indispensáveis</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-blush/10 rounded-xl text-center">
+                        <p class="text-espresso font-medium">
+                            O respeito mútuo e a elegância no trato são fundamentais para que nosso encontro aconteça.
+                        </p>
                     </div>
                 </div>
             </div>
