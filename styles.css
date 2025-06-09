@@ -93,9 +93,9 @@ nav h1 {
 
 .hero-text {
     position: absolute;
-    top: 75%;
+    bottom: 50px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     text-align: center;
 }
 
