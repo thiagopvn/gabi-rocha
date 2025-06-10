@@ -124,6 +124,17 @@ nav h1 {
     color: #000;
 }
 
+.story-section .btn {
+    border: 1px solid rgba(255,255,255,0.8);
+}
+
+.story-section .btn:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+}
+
 section {
     padding: 100px 0;
 }
