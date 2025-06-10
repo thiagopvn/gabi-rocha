@@ -1,24 +1,3 @@
-function toggleAccordion(id) {
-    const content = document.getElementById(id);
-    const icon = document.getElementById(id + '-icon');
-    const header = icon.parentElement;
-    
-    if (content.classList.contains('active')) {
-        content.classList.remove('active');
-        header.classList.remove('active');
-    } else {
-         document.querySelectorAll('.accordion-content').forEach(el => {
-            el.classList.remove('active');
-        });
-        document.querySelectorAll('.accordion-header').forEach(el => {
-            el.classList.remove('active');
-        });
-
-        content.classList.add('active');
-        header.classList.add('active');
-    }
-}
-
 function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
     navLinks.classList.toggle('active');
@@ -81,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                // Se você tiver data-src para lazy loading
                 if (img.dataset.src) {
                     img.src = img.dataset.src;
                     img.removeAttribute('data-src');

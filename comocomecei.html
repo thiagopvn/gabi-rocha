@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Comecei - Gabi Rocha</title>
+    <meta name="description" content="A história de como Gabi Rocha começou">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .story-hero {
+            height: 60vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 65px;
+        }
+        
+        .story-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .story-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+        }
+        
+        .story-hero-text {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 90%;
+        }
+        
+        .story-hero-text h1 {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        
+        .story-content {
+            background: #0a0a0a;
+            padding: 80px 0;
+        }
+        
+        .story-section {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 20px;
+            margin-bottom: 60px;
+        }
+        
+        .story-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .story-section h3 {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-align: center;
+            opacity: 0.9;
+        }
+        
+        .story-section p {
+            font-size: 17px;
+            font-weight: 300;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            opacity: 0.85;
+        }
+        
+        .highlight-quote {
+            padding: 40px;
+            margin: 60px 0;
+            border-left: 2px solid rgba(255,215,0,0.5);
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .highlight-quote p {
+            font-size: 19px;
+            font-style: italic;
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        .image-break {
+            width: 100%;
+            height: 400px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-break img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .final-message {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .final-message p {
+            font-size: 20px;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .back-link {
+            text-align: center;
+            padding: 60px 0;
+            background: #000;
+        }
+        
+        .back-link a {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        
+        .back-link a:hover {
+            background: #fff;
+            color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .story-hero {
+                height: 50vh;
+                margin-top: 60px;
+            }
+            
+            .story-hero-text h1 {
+                font-size: 28px;
+            }
+            
+            .story-content {
+                padding: 50px 0;
+            }
+            
+            .story-section {
+                margin-bottom: 40px;
+            }
+            
+            .story-section h3 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .story-section p {
+                font-size: 15px;
+            }
+            
+            .highlight-quote {
+                padding: 25px;
+                margin: 40px 0;
+            }
+            
+            .highlight-quote p {
+                font-size: 16px;
+            }
+            
+            .image-break {
+                height: 250px;
+                margin: 50px 0;
+            }
+            
+            .final-message p {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <h1>GABI ROCHA</h1>
+            <div class="nav-links">
+                <a href="index.html">INÍCIO</a>
+                <a href="index.html#encontros">ENCONTROS</a>
+                <a href="index.html#galeria">GALERIA</a>
+                <a href="index.html#contato">CONTATO</a>
+            </div>
+            <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <section class="story-hero">
+        <img src="images/comecei-hero.jpg" alt="Gabi Rocha">
+        <div class="story-hero-overlay"></div>
+        <div class="story-hero-text">
+            <h1>COMO COMECEI</h1>
+        </div>
+    </section>
+
+    <section class="story-content">
+        <div class="story-section">
+            <h3>INTENSIDADE</h3>
+            <p>Se tem algo que sempre me acompanhou, foi a intensidade. Desde cedo precisei amadurecer, encarar o mundo por conta própria, e fui acumulando experiências que moldaram quem sou. Talvez por isso nunca me encaixei em vínculos rasos. E pra ser bem honesta, quase nunca fui realmente feliz nesses namoricos por aí rs</p>
+        </div>
+
+        <div class="story-section">
+            <h3>BUSCANDO PROFUNDIDADE</h3>
+            <p>Sempre me incomodou a previsibilidade, os gestos mecânicos, o esforço em parecer que está tudo bem, quando no fundo nada pulsa de verdade. Me incomoda como nas relações convencionais as pessoas vão se encostando, mas nem sempre se encontram de verdade. Enquanto muita gente ainda explorava o básico, eu já buscava profundidade. Algo que me instigasse, que me fizesse ser eu — no mais cru, no mais real, mas sem precisar vestir o papel da boa moça que senta num restaurante esperando o príncipe encantado chegar e salvar alguma coisa.</p>
+        </div>
+
+        <div class="highlight-quote">
+            <p>"Sempre fui movida pelo novo, pelo diferente e, principalmente, por quem me desperta como mulher. Gosto de sentir o espírito de homem, sabe? Aquela energia que conduz, que marca presença, mas sem atropelar."</p>
+        </div>
+
+        <div class="story-section">
+            <h3>O PRAZER VERDADEIRO</h3>
+            <p>Que olha nos olhos, que me ouve, que me instiga, que me faz querer saber mais. Sempre fui atraída por pessoas que me fazem pensar, que me ensinam algo, que mexem com a minha curiosidade. Isso toca meu corpo e a minha alma de um jeito que nenhum ato mecânico jamais conseguiria.</p>
+            <p>E foi aí que entendi: o meu prazer começa muito antes de qualquer toque. Ele tá no olhar que provoca, na conversa que prende, num gesto simples que diz muito. Gosto quando o desejo cresce devagar, quando a tensão se cria no detalhe, quando o corpo se prepara antes mesmo de ser tocado. Porque pra mim, a entrega só acontece quando há presença.</p>
+        </div>
+
+        <div class="story-section">
+            <h3>DESCOBERTAS</h3>
+            <p>Essa busca por algo fora do comum me levou ao universo sugar. Uma amiga, vendo minhas frustrações com dates ruins, me apresentou esse mundo. E logo eu estava imersa. Descobri um espaço onde o desejo e o cuidado podiam caminhar juntos. Onde não existiam rótulos sufocantes, mas ainda assim havia profundidade. Onde eu podia ser inteira, sem deixar de ser respeitada e valorizada.</p>
+            <p>Conheci pessoas incríveis, vivi experiências marcantes, cresci, me envolvi, me surpreendi. Foi um mergulho delicioso e, sem querer, transformador.</p>
+        </div>
+
+        <div class="image-break">
+            <img src="images/comecei-mid.jpg" alt="Jornada">
+        </div>
+
+        <div class="story-section">
+            <h3>RECOMEÇOS</h3>
+            <p>Mas como toda história bem vivida, também vieram os aprendizados. No final de 2024, uma decepção me fez me afastar desse universo. Tentei voltar pro previsível, até dei umas chances pra aplicativos, mas a verdade é que aquilo nunca me encantou. A maioria das conversas não tinha brilho, não despertava nada em mim. É muita camada, muito ego, muita pose. Papo pra outra hora hahah</p>
+            <p>Só que dentro de mim ainda existia esse desejo por algo que fizesse sentido de verdade.</p>
+        </div>
+
+        <div class="story-section">
+            <h3>UM NOVO CAMINHO</h3>
+            <p>Foi então que comecei a olhar com mais curiosidade pro mundo das acompanhantes. No começo, claro, vieram alguns preconceitos que precisei desconstruir. Fui ouvindo outras mulheres, lendo, observando com mais cuidado. E aos poucos fui entendendo que esse universo podia sim acolher o tipo de conexão que sempre busquei. Onde o desejo é livre, a troca é sincera, e o respeito não se perde no caminho.</p>
+            <p>Percebi que muitos homens também estavam cansados do superficial. E ali eu entendi que fazia sentido.</p>
+        </div>
+
+        <div class="highlight-quote">
+            <p>"Sempre me atraiu o prazer de ser cuidada. Não só no toque, mas no olhar atento, na escuta presente, no gesto que demonstra intenção. E sim, parte disso também está em viver coisas boas."</p>
+        </div>
+
+        <div class="story-section">
+            <h3>MEU ESTILO</h3>
+            <p>Um jantar especial, um presente com significado, uma viagem inesperada, um vestido que abraça o corpo e o momento.</p>
+            <p>Não é sobre ser paga. É sobre se sentir lembrada, celebrada, desejada com atenção. Sobre saber que aquele tempo foi escolhido com vontade e tem um porquê.</p>
+            <p>Depois de muita reflexão, decidi seguir esse caminho à minha maneira. Sem fórmulas, sem pressa, sem nada que não tenha verdade. Criei um estilo de atendimento que tem a ver comigo. Seletiva, curiosa, envolvente, leve.</p>
+            <p>Gosto de encontros que deixam marca. Que despertam. Que viram lembrança gostosa no corpo e na memória.</p>
+        </div>
+
+        <div class="final-message">
+            <p>E se for pra estar ali, que seja por vontade<br>
+            Dos dois lados</p>
+            
+            <p>Porque pra mim, o que realmente vale<br>
+            É quando o momento é bom<br>
+            De verdade</p>
+        </div>
+    </section>
+
+    <div class="back-link">
+        <a href="index.html#sobre">VOLTAR</a>
+    </div>
+
+    <footer>
+        <p>GABI ROCHA • SÃO PAULO • 2025</p>
+    </footer>
+
+    <a href="https://wa.me/5511933333607" class="whats-float">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

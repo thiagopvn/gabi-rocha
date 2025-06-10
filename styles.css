@@ -573,3 +573,35 @@ footer p {
         height: 25px;
     }
 }
+.accordion-link {
+    width: 100%;
+    padding: 20px 30px;
+    background: transparent;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.accordion-link:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.accordion-link h3 {
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.accordion-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 768px) {
+    .accordion-link {
+        padding: 15px 20px;
+    }
+}
